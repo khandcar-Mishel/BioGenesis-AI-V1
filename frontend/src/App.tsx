@@ -1,11 +1,19 @@
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
-import { Settings, Database, Activity, LayoutGrid, Folder, Clock, XCircle, CheckCircle2, Hammer, Microscope, Waves, Users, ArrowLeft } from 'lucide-react';
+import {
+  Settings, Database, LayoutGrid, Folder, Clock, XCircle, Hammer,
+  Microscope, Waves, ArrowLeft, Dna, BookOpen, HelpCircle, Cloud,
+} from 'lucide-react';
 import { DesignView } from './features/DesignView';
 import { AnalyzeView } from './features/AnalyzeView';
 import { ResultsView } from './features/ResultsView';
 import { SettingsView } from './features/SettingsView';
 import { LandingPage } from './features/LandingPage';
+import { RFdiffusionLanding } from './features/RFdiffusionLanding';
+import { ScreeningLanding } from './features/ScreeningLanding';
+import { MDSimulationLanding } from './features/MDSimulationLanding';
+import { AboutUsPage } from './features/AboutUsPage';
 import { ComingSoon } from './components/ComingSoon';
+import { BrandMark } from './components/BrandMark';
 import { useAppStore } from './stores/appStore';
 import { useEffect } from 'react';
 
@@ -14,71 +22,64 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/rfdiffusion/*" element={<RFdiffusionApp />} />
+
+        <Route path="/rfdiffusion" element={<RFdiffusionLanding />} />
+        <Route path="/rfdiffusion/studio/*" element={<RFdiffusionStudio />} />
+
+        <Route path="/screening" element={<ScreeningLanding />} />
         <Route
-          path="/screening"
+          path="/screening/workspace"
           element={
             <ComingSoon
               icon={Microscope}
-              eyebrow="Pipeline · Stage 4"
-              title="Screening"
-              description="High-throughput in-silico filtering of every RFdiffusion design against binding affinity, stability and developability criteria — before a single sequence reaches the wet lab."
+              eyebrow="Pipeline · Stage 2"
+              title="Screening Workspace"
+              description="The Screening workspace itself isn't wired up yet — the tools table on the Screening page links out to the real bioinformatics services in the meantime."
               bullets={[
-                'Batch scoring across all designs from a completed job',
-                'Configurable filters: pLDDT, interface pAE, RMSD to target',
+                'Batch scoring across every design from a completed RFdiffusion job',
+                'Configurable filters: toxicity, allergenicity, stability, solubility',
                 'Rank and shortlist candidates directly from the Results library',
               ]}
             />
           }
         />
+
+        <Route path="/md-simulation" element={<MDSimulationLanding />} />
         <Route
-          path="/md-simulation"
+          path="/md-simulation/workspace"
           element={
             <ComingSoon
               icon={Waves}
-              eyebrow="Pipeline · Stage 5"
-              title="MD Simulation"
-              description="Molecular dynamics trajectories to validate that a design's fold is stable over time, not just at a single predicted structure."
+              eyebrow="Pipeline · Stage 3"
+              title="MD Simulation Workspace"
+              description="GPU-accelerated molecular dynamics to confirm a designed fold holds up over time, launched straight from an RFdiffusion result."
               bullets={[
-                'GPU-accelerated MD via OpenMM, launched straight from a design',
-                'Stability, RMSF and free-energy trajectory plots',
+                'OpenMM-based MD, run on the same serverless GPU as RFdiffusion',
+                'RMSD, RMSF, radius of gyration and secondary-structure trajectories',
                 'Trajectory playback inside the same 3D viewer used for results',
               ]}
             />
           }
         />
+
         <Route
           path="/results"
           element={
             <ComingSoon
               icon={LayoutGrid}
               eyebrow="Unified library"
-              title="Results"
-              description="A single library of every design, sequence and structure produced across RFdiffusion, Screening and MD Simulation — searchable, comparable, exportable."
+              title="Results Library"
+              description="A single, searchable library of every design, sequence and structure produced across RFdiffusion, Screening and MD Simulation — not just the current session."
               bullets={[
-                'Cross-pipeline history, not just the current session',
+                'Cross-pipeline history, persisted beyond one browser session',
                 'Side-by-side structure comparison and diffing',
                 'One-click export to PDB, FASTA or a shareable report',
               ]}
             />
           }
         />
-        <Route
-          path="/about"
-          element={
-            <ComingSoon
-              icon={Users}
-              eyebrow="The team"
-              title="About Us"
-              description="BioGen AI is built by a small team obsessed with making generative protein design accessible from a browser tab, not just a cluster."
-              bullets={[
-                'Our story and the research this studio builds on',
-                'How RFdiffusion, ProteinMPNN and AlphaFold2 fit together',
-                'Ways to reach us, contribute, or follow along',
-              ]}
-            />
-          }
-        />
+
+        <Route path="/about" element={<AboutUsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
@@ -86,7 +87,7 @@ export default function App() {
 }
 
 /** The working RFdiffusion studio — Design / Analyze / Results / Settings. */
-function RFdiffusionApp() {
+function RFdiffusionStudio() {
   const { checkConnection } = useAppStore();
 
   useEffect(() => {
@@ -106,9 +107,11 @@ function RFdiffusionApp() {
             <Route path="/analyze" element={<AnalyzeView />} />
             <Route path="/results" element={<ResultsView />} />
             <Route path="/settings" element={<SettingsView />} />
+            <Route path="/examples" element={<PlaceholderPage icon={<BookOpen size={20} />} title="Examples" message="A gallery of ready-to-run presets (binder design, motif scaffolding, symmetric oligomers) is coming here. For now, pick a preset template directly from the Design panel." />} />
             <Route path="/projects" element={<PlaceholderPage icon={<Folder size={20} />} title="Projects" message="Project workspaces are coming in a future release. All designs you generate stay available under Results." />} />
             <Route path="/history" element={<PlaceholderPage icon={<Clock size={20} />} title="History" message="A run history log is coming in a future release." />} />
-            <Route path="*" element={<Navigate to="/rfdiffusion" replace />} />
+            <Route path="/help" element={<PlaceholderPage icon={<HelpCircle size={20} />} title="Help" message="Docs are on the way. In the meantime, hover the (?) icons next to each field for guidance, or reach out from the About Us page." />} />
+            <Route path="*" element={<Navigate to="/rfdiffusion/studio" replace />} />
           </Routes>
         </main>
       </div>
@@ -118,58 +121,45 @@ function RFdiffusionApp() {
 
 function Header() {
   const { isBackendConnected } = useAppStore();
+  const steps = ['Target', 'Design', 'Backbone', 'Sequence', 'Structure', 'Results'];
   return (
     <div className="bg-white border-b border-slate-200 flex items-center justify-between px-6 py-3 shrink-0 h-[72px] z-10">
-      <div className="flex items-center gap-4 w-[260px]">
+      <div className="flex items-center gap-4 w-[220px]">
         <Link to="/" className="flex items-center gap-3 group shrink-0">
-          <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-900 shadow-sm transition-transform group-hover:scale-105">
-            <svg width="18" height="18" viewBox="0 0 20 20" className="text-bio-500">
-              <path
-                d="M5 2.5c0 5 10 5 10 10s-10 5-10 10M5 5.5c0 3.5 10 3.5 10 7s-10 3.5-10 7"
-                fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round"
-              />
-            </svg>
-          </span>
+          <BrandMark size={40} />
           <div className="flex flex-col justify-center">
-            <h1 className="font-extrabold text-[16px] text-slate-800 tracking-tight leading-tight">BioGen AI</h1>
-            <p className="text-[11px] text-slate-500 font-medium tracking-wide">RFdiffusion Studio</p>
+            <h1 className="font-extrabold text-[15px] text-slate-800 tracking-tight leading-tight">BioGen AI</h1>
+            <p className="text-[10.5px] text-slate-500 font-medium tracking-wide">RFdiffusion Workspace</p>
           </div>
         </Link>
       </div>
 
-      <div className="flex-1 flex justify-center">
-        <div className="flex items-center gap-3 text-[13px] font-semibold text-slate-400">
-          <div className="flex items-center gap-2 text-emerald-700">
-            <div className="w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[12px]">1</div>
-            Target
-          </div>
-          <div className="w-8 h-[1px] bg-slate-200"></div>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-[12px]">2</div>
-            Design
-          </div>
-          <div className="w-8 h-[1px] bg-slate-200"></div>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-[12px]">3</div>
-            Generate
-          </div>
-          <div className="w-8 h-[1px] bg-slate-200"></div>
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-[12px]">4</div>
-            Analyze
-          </div>
+      <div className="flex-1 hidden lg:flex justify-center overflow-x-auto">
+        <div className="flex items-center gap-2.5 text-[12.5px] font-semibold text-slate-400 whitespace-nowrap">
+          {steps.map((label, i) => (
+            <div key={label} className="flex items-center gap-2.5">
+              <div className={`flex items-center gap-1.5 ${i === 0 ? 'text-emerald-700' : ''}`}>
+                <div className={`w-5 h-5 rounded-full flex items-center justify-center text-[10.5px] ${i === 0 ? 'bg-emerald-600 text-white' : 'border border-slate-300'}`}>{i + 1}</div>
+                {label}
+              </div>
+              {i < steps.length - 1 && <div className="w-5 h-[1px] bg-slate-200" />}
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="flex items-center gap-3 text-sm w-[260px] justify-end">
+      <div className="flex items-center gap-3 text-sm w-[220px] justify-end">
         {isBackendConnected ? (
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-emerald-500 text-emerald-600 font-bold text-[12px] shadow-sm">
-            <CheckCircle2 size={14} className="text-emerald-500" />
-            GPU Connected
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-[11.5px]">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            Compute Ready · Modal GPU
           </div>
         ) : (
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-red-500 text-red-600 font-bold text-[12px] shadow-sm">
-            <XCircle size={14} className="text-red-500" />
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-red-300 text-red-600 font-bold text-[11.5px]">
+            <XCircle size={13} className="text-red-500" />
             GPU Disconnected
           </div>
         )}
@@ -181,34 +171,39 @@ function Header() {
 function Sidebar() {
   const { isBackendConnected } = useAppStore();
   return (
-    <div className="w-[240px] bg-white border-r border-slate-200 flex flex-col shrink-0">
+    <div className="w-[230px] bg-white border-r border-slate-200 flex flex-col shrink-0">
       <div className="p-4 flex-1 overflow-y-auto">
         <div className="mb-6">
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">WORKSPACE</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion" end icon={<Activity size={18}/>} label="Design" />
-            <SidebarLink to="/rfdiffusion/analyze" icon={<Database size={18}/>} label="Analyze" />
-            <SidebarLink to="/rfdiffusion/results" icon={<LayoutGrid size={18}/>} label="Results" />
+            <SidebarLink to="/rfdiffusion/studio" end icon={<Dna size={18}/>} label="RFdiffusion" />
+            <SidebarLink to="/rfdiffusion/studio/examples" icon={<BookOpen size={18}/>} label="Examples" />
+            <SidebarLink to="/rfdiffusion/studio/analyze" icon={<Database size={18}/>} label="Analyze" />
+            <SidebarLink to="/rfdiffusion/studio/results" icon={<LayoutGrid size={18}/>} label="Results" />
           </div>
         </div>
 
         <div className="mb-6">
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">PROJECT</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion/projects" icon={<Folder size={18}/>} label="Projects" />
-            <SidebarLink to="/rfdiffusion/history" icon={<Clock size={18}/>} label="History" />
+            <SidebarLink to="/rfdiffusion/studio/projects" icon={<Folder size={18}/>} label="Projects" />
+            <SidebarLink to="/rfdiffusion/studio/history" icon={<Clock size={18}/>} label="History" />
           </div>
         </div>
 
         <div>
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">SYSTEM</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion/settings" icon={<Settings size={18}/>} label="Settings" status={isBackendConnected ? 'online' : 'offline'} />
+            <SidebarLink to="/rfdiffusion/studio/settings" icon={<Settings size={18}/>} label="Settings" status={isBackendConnected ? 'online' : 'offline'} />
+            <SidebarLink to="/rfdiffusion/studio/help" icon={<HelpCircle size={18}/>} label="Help" />
           </div>
         </div>
       </div>
 
-      <div className="p-4 border-t border-slate-100">
+      <div className="p-3 border-t border-slate-100 space-y-1">
+        <div className="flex items-center gap-2 px-3 py-2 text-[11px] font-semibold text-slate-400">
+          <Cloud size={13} /> Serverless GPU via Modal
+        </div>
         <Link to="/" className="flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-semibold text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors">
           <ArrowLeft size={14} /> Back to Home
         </Link>

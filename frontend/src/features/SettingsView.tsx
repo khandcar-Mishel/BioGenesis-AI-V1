@@ -108,7 +108,7 @@ export function SettingsView() {
     setConnectionStatus(true, now);
 
     // Quick success redirect
-    navigate('/rfdiffusion');
+    navigate('/rfdiffusion/studio');
   };
 
   return (
@@ -167,7 +167,7 @@ export function SettingsView() {
                 {...register('endpoint')}
                 onBlur={formatUrl}
                 placeholder="http://localhost:8000/api/v1"
-                className="w-full bg-slate-50 border border-slate-300 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 rounded-lg px-3 py-1.5 text-xs text-slate-800 outline-none transition-all"
+                className="w-full bg-slate-50 border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 rounded-lg px-3 py-1.5 text-xs text-slate-800 outline-none transition-all"
               />
               {errors.endpoint && <p className="text-red-500 text-[10px] font-bold mt-1">{errors.endpoint.message}</p>}
             </div>
@@ -180,7 +180,7 @@ export function SettingsView() {
                 type="password"
                 {...register('apiKey')}
                 placeholder="Only required if the backend enforces an API key"
-                className="w-full bg-slate-50 border border-slate-300 focus:border-sky-500 focus:ring-2 focus:ring-sky-100 rounded-lg px-3 py-1.5 text-xs font-mono tracking-widest text-slate-800 outline-none transition-all"
+                className="w-full bg-slate-50 border border-slate-300 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100 rounded-lg px-3 py-1.5 text-xs font-mono tracking-widest text-slate-800 outline-none transition-all"
               />
               {errors.apiKey && <p className="text-red-500 text-[10px] font-bold mt-1">{errors.apiKey.message}</p>}
             </div>
@@ -207,7 +207,7 @@ export function SettingsView() {
                 type="button"
                 onClick={handleSubmit(onSaveAndConnect)}
                 disabled={gpuStatus !== 'connected'}
-                className="flex-1 bg-[#0060df] hover:bg-[#0050b3] text-white px-4 py-1.5 rounded-lg font-bold text-xs transition-colors disabled:opacity-50 disabled:bg-slate-300 flex items-center justify-center gap-1.5 shadow-sm"
+                className="flex-1 bg-[#059669] hover:bg-[#047857] text-white px-4 py-1.5 rounded-lg font-bold text-xs transition-colors disabled:opacity-50 disabled:bg-slate-300 flex items-center justify-center gap-1.5 shadow-sm"
               >
                 💾 Save & Connect
               </button>

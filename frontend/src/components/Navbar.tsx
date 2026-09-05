@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
+import { BrandMark } from './BrandMark';
 
 const LINKS = [
   { to: '/', label: 'Home' },
   { to: '/rfdiffusion', label: 'RFdiffusion' },
-  { to: '/screening', label: 'Screening', soon: true },
-  { to: '/md-simulation', label: 'MD Simulation', soon: true },
-  { to: '/results', label: 'Results', soon: true },
-  { to: '/about', label: 'About Us', soon: true },
+  { to: '/screening', label: 'Screening' },
+  { to: '/md-simulation', label: 'MD Simulation' },
+  { to: '/results', label: 'Results' },
+  { to: '/about', label: 'About Us' },
 ];
 
 export function Navbar() {
@@ -18,7 +19,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -30,25 +31,17 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 border-b transition-colors duration-300 ${
-        scrolled || open ? 'bg-lab-950/90 backdrop-blur border-white/10' : 'bg-transparent border-transparent'
+      className={`sticky top-0 z-50 bg-white/95 backdrop-blur border-b transition-shadow ${
+        scrolled ? 'border-slate-200 shadow-sm' : 'border-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 shrink-0 group">
-          <svg width="20" height="20" viewBox="0 0 20 20" className="text-bio-500">
-            <path
-              d="M5 2.5c0 5 10 5 10 10s-10 5-10 10M5 5.5c0 3.5 10 3.5 10 7s-10 3.5-10 7"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.4"
-              strokeLinecap="round"
-              opacity={0.9}
-            />
-          </svg>
-          <span className="font-lab font-bold text-[14px] tracking-tight text-white">
-            biogen<span className="text-bio-500">.ai</span>
-          </span>
+        <Link to="/" className="flex items-center gap-2.5 shrink-0">
+          <BrandMark />
+          <div className="leading-tight">
+            <p className="font-extrabold text-[15px] text-slate-900 tracking-tight">BioGen AI</p>
+            <p className="text-[10px] text-slate-500 font-medium -mt-0.5 hidden sm:block">Generative Protein Design for Research</p>
+          </div>
         </Link>
 
         <div className="hidden md:flex items-center gap-0.5">
@@ -56,16 +49,15 @@ export function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`relative px-3.5 py-2 text-[13px] font-medium transition-colors flex items-center gap-1.5 ${
-                isActive(link.to) ? 'text-white' : 'text-slate-500 hover:text-slate-200'
+              className={`relative px-3.5 py-2 text-[13.5px] font-semibold transition-colors ${
+                isActive(link.to) ? 'text-emerald-700' : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              <span>{link.label}</span>
-              {link.soon && <span className="font-lab text-[9px] text-slate-600">[soon]</span>}
+              {link.label}
               {isActive(link.to) && (
                 <motion.span
                   layoutId="nav-underline"
-                  className="absolute left-3.5 right-3.5 -bottom-[1px] h-[1.5px] bg-bio-500"
+                  className="absolute left-3.5 right-3.5 -bottom-[1px] h-[2px] rounded-full bg-emerald-600"
                   transition={{ type: 'spring', stiffness: 450, damping: 34 }}
                 />
               )}
@@ -73,21 +65,16 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center gap-2">
           <Link
             to="/rfdiffusion"
-            className="inline-flex items-center gap-2 rounded-md border border-bio-500/40 bg-bio-500/10 px-4 py-1.5 text-[13px] font-semibold text-bio-400 transition-colors hover:bg-bio-500/20 hover:border-bio-500/70"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2 text-[13px] font-bold text-white transition-colors hover:bg-emerald-700"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-bio-500 glow-pulse" />
-            Launch Studio
+            Get Started <ArrowRight size={14} strokeWidth={2.5} />
           </Link>
         </div>
 
-        <button
-          className="md:hidden text-white p-2 -mr-2"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
+        <button className="md:hidden text-slate-700 p-2 -mr-2" onClick={() => setOpen((v) => !v)} aria-label="Toggle menu">
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
       </nav>
@@ -99,26 +86,25 @@ export function Navbar() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="md:hidden overflow-hidden border-t border-white/10"
+            className="md:hidden overflow-hidden border-t border-slate-200 bg-white"
           >
             <div className="px-5 py-4 flex flex-col gap-1">
               {LINKS.map((link) => (
                 <Link
                   key={link.to}
                   to={link.to}
-                  className={`flex items-center justify-between px-3 py-2.5 text-sm font-medium border-l-2 ${
-                    isActive(link.to) ? 'border-bio-500 text-white bg-white/[0.03]' : 'border-transparent text-slate-500'
+                  className={`px-3 py-2.5 rounded-lg text-sm font-semibold ${
+                    isActive(link.to) ? 'bg-emerald-50 text-emerald-700' : 'text-slate-600'
                   }`}
                 >
                   {link.label}
-                  {link.soon && <span className="font-lab text-[10px] text-slate-600">[soon]</span>}
                 </Link>
               ))}
               <Link
                 to="/rfdiffusion"
-                className="mt-2 inline-flex items-center justify-center gap-2 rounded-md border border-bio-500/40 bg-bio-500/10 px-4 py-2.5 text-sm font-semibold text-bio-400"
+                className="mt-2 inline-flex items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-bio-500" /> Launch Studio
+                Get Started <ArrowRight size={14} strokeWidth={2.5} />
               </Link>
             </div>
           </motion.div>

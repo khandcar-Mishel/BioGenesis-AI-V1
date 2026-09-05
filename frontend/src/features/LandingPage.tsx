@@ -1,313 +1,198 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowUpRight, Microscope, Waves, LayoutGrid, Users,
-  Layers, Cpu, ShieldCheck, ExternalLink, Dna,
+  ArrowRight, Dna, Microscope, Waves, Cpu, Database, Users, Zap,
+  Clock, Coins, Cloud, LayoutGrid, Rocket, Upload, Settings, BarChart3, Trophy,
 } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
-import { DiffusionBackbone } from '../components/DiffusionBackbone';
-import { LiveMoleculePreview } from '../components/LiveMoleculePreview';
-import { TechnicalNoise } from '../components/TechnicalNoise';
+import { SiteFooter } from '../components/SiteFooter';
+import { HeroVisual } from '../components/HeroVisual';
+import { BenefitStrip, IconGrid, HowItWorks, CTABanner, fadeUpVariant } from '../components/MarketingKit';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 22 },
-  show: { opacity: 1, y: 0 },
-};
-
-const PIPELINE = [
+const TOOLS = [
   {
-    tag: '01 · LIVE',
     icon: Dna,
+    tint: 'bg-emerald-50 text-emerald-600',
+    tag: 'PROTEIN DESIGN',
+    tagTint: 'bg-emerald-50 text-emerald-700',
     title: 'RFdiffusion',
-    desc: 'De novo backbone generation via generative diffusion — binders, motif scaffolds, symmetric oligomers.',
+    desc: 'Generate novel protein and peptide structures using state-of-the-art diffusion models.',
+    bullets: ['De novo design', 'Target-conditioned design', 'High-quality structures'],
     to: '/rfdiffusion',
-    status: 'live' as const,
+    buttonClass: 'bg-emerald-600 hover:bg-emerald-700',
   },
   {
-    tag: '02',
     icon: Microscope,
+    tint: 'bg-violet-50 text-violet-600',
+    tag: 'PEPTIDE SCREENING',
+    tagTint: 'bg-violet-50 text-violet-700',
     title: 'Screening',
-    desc: 'Batch scoring of generated designs against binding affinity, stability and developability filters.',
+    desc: 'Evaluate designed peptides with multiple bioinformatics tools to identify the most promising candidates.',
+    bullets: ['Toxicity & allergenicity prediction', 'Stability & solubility assessment', 'Drug-like property analysis'],
     to: '/screening',
-    status: 'soon' as const,
+    buttonClass: 'bg-violet-600 hover:bg-violet-700',
   },
   {
-    tag: '03',
     icon: Waves,
+    tint: 'bg-sky-50 text-sky-600',
+    tag: 'DYNAMICS & ANALYSIS',
+    tagTint: 'bg-sky-50 text-sky-700',
     title: 'MD Simulation',
-    desc: 'GPU-accelerated molecular dynamics to confirm a fold holds up over time, not just in one prediction.',
+    desc: 'Explore the dynamic behavior and stability of your designed proteins through atomic-level simulations.',
+    bullets: ['Structural stability analysis', 'Interaction with targets/ligands', 'Trajectory and conformational insights'],
     to: '/md-simulation',
-    status: 'soon' as const,
+    buttonClass: 'bg-sky-600 hover:bg-sky-700',
   },
-  {
-    tag: '04',
-    icon: LayoutGrid,
-    title: 'Results',
-    desc: 'One searchable library of every design, sequence and structure produced across every pipeline.',
-    to: '/results',
-    status: 'soon' as const,
-  },
-];
-
-const STAGES = [
-  { icon: Layers, label: 'Stage 1', name: 'RFdiffusion', desc: 'Denoise coordinates into a backbone' },
-  { icon: Cpu, label: 'Stage 2', name: 'ProteinMPNN', desc: 'Inverse-fold a sequence onto it' },
-  { icon: ShieldCheck, label: 'Stage 3', name: 'AlphaFold2', desc: 'Re-predict and score the fold' },
-];
-
-const STATS = [
-  { value: '3', label: 'stages · one job' },
-  { value: 'T4', label: 'GPU, on demand' },
-  { value: '32', label: 'designs per run, max' },
 ];
 
 export function LandingPage() {
   return (
-    <div className="min-h-screen lab-bg text-white overflow-x-clip">
+    <div className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       {/* ---------------------------------------------------------------- Hero */}
-      <section className="relative pt-40 pb-28 sm:pt-48 sm:pb-36 border-b border-white/[0.06]">
-        <div className="absolute inset-0 lab-grid pointer-events-none" />
-        <TechnicalNoise />
-
-        <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
+      <section className="relative hero-wash pt-16 pb-28 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 border border-white/10 px-3 py-1 mb-7"
-            >
-              <span className="h-1.5 w-1.5 rounded-full bg-bio-500 glow-pulse" />
-              <span className="font-lab text-[10.5px] tracking-[0.15em] text-slate-400 uppercase">
-                RFdiffusion → ProteinMPNN → AlphaFold2
-              </span>
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
+              className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 mb-6">
+              <Zap size={12} className="text-emerald-600" />
+              <span className="text-[11px] font-bold text-emerald-700 tracking-wide uppercase">AI for Protein Innovation</span>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-[2.75rem] sm:text-6xl font-black tracking-tight leading-[1.04] mb-6"
-            >
-              A backbone starts
-              <br />
-              as noise. <span className="text-bio-500">Watch it fold.</span>
+            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
+              className="text-4xl sm:text-5xl lg:text-[3.2rem] font-black tracking-tight leading-[1.08] mb-5">
+              From Ideas to<br /><span className="text-emerald-600">Functional Proteins.</span>
             </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-slate-400 text-[15.5px] leading-relaxed max-w-lg mb-9"
-            >
-              BioGen AI runs the RFdiffusion pipeline behind a real GPU: set a
-              contig, a hotspot, a symmetry — and get a de novo protein
-              backbone denoised from pure noise in front of you, end to end,
-              from one browser tab.
+            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
+              className="text-slate-500 text-[15.5px] leading-relaxed max-w-lg mb-8">
+              BioGen AI combines state-of-the-art generative AI, biomolecular simulation, and analysis tools to
+              help researchers design, evaluate, and understand proteins and peptides — faster, easier, and more accessible.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-wrap items-center gap-3"
-            >
-              <Link
-                to="/rfdiffusion"
-                className="group inline-flex items-center gap-2 bg-bio-500 px-5 py-2.5 text-sm font-bold text-lab-950 transition-colors hover:bg-bio-400"
-              >
-                Launch RFdiffusion Studio
-                <ArrowUpRight size={15} strokeWidth={2.5} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
+              className="flex flex-wrap items-center gap-3">
+              <Link to="/rfdiffusion" className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
+                Get Started <ArrowRight size={15} strokeWidth={2.5} />
               </Link>
-              <a
-                href="#pipeline"
-                className="inline-flex items-center gap-1.5 border border-white/15 px-5 py-2.5 text-sm font-medium text-slate-300 transition-colors hover:border-white/30 hover:text-white"
-              >
-                Explore the pipeline
+              <a href="#tools" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
+                See how it works
               </a>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mt-14 grid grid-cols-3 gap-6 max-w-md border-t border-white/10 pt-6"
-            >
-              {STATS.map((s) => (
-                <div key={s.label}>
-                  <p className="font-lab text-2xl sm:text-3xl font-bold text-bio-500">{s.value}</p>
-                  <p className="text-[11px] text-slate-500 font-medium mt-0.5">{s.label}</p>
-                </div>
-              ))}
-            </motion.div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.94 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative flex items-center justify-center pb-8"
-          >
-            <DiffusionBackbone className="relative w-full max-w-[380px] aspect-square" />
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.2 }}>
+            <HeroVisual
+              pdbId="1EMA"
+              colorscheme="greenCarbon"
+              handNote={'Design\nSimulate\nDiscover'}
+              statCard={{ title: 'Designed Protein', rows: [
+                { label: 'Length', value: '124 aa' },
+                { label: 'Confidence', value: '0.93' },
+                { label: 'Target', value: 'Custom' },
+                { label: 'Method', value: 'RFdiffusion' },
+              ]}}
+              checklist={['Novel structures', 'Target-specific design', 'Simulation-ready', 'Research accelerated']}
+            />
           </motion.div>
         </div>
       </section>
 
-      {/* ------------------------------------------------------------ Pipeline */}
-      <section id="pipeline" className="relative py-24 border-b border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="max-w-xl mb-14"
-          >
-            <p className="font-lab text-[11px] tracking-[0.2em] text-slate-500 uppercase mb-3">// the studio</p>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">One workspace, four pipelines</h2>
-            <p className="text-slate-400 text-[15px] leading-relaxed">
-              RFdiffusion is live today, running on a real GPU. Screening, MD
-              Simulation and a unified Results library are next.
-            </p>
-          </motion.div>
+      <BenefitStrip items={[
+        { icon: Rocket, label: 'Generative AI Design' },
+        { icon: Database, label: 'Integrated Analysis Tools' },
+        { icon: Users, label: 'Accessible for Researchers' },
+        { icon: Zap, label: 'Faster Path to Discovery' },
+      ]} />
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.06]">
-            {PIPELINE.map((p, i) => (
-              <motion.div
-                key={p.title}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, margin: '-60px' }}
-                variants={fadeUp}
-                transition={{ duration: 0.45, delay: i * 0.07 }}
-                className="bg-lab-950"
-              >
-                <Link to={p.to} className="group relative flex flex-col h-full p-6 transition-colors hover:bg-white/[0.02]">
-                  <div className="flex items-center justify-between mb-6">
-                    <p.icon size={18} className="text-slate-500 group-hover:text-bio-500 transition-colors" strokeWidth={1.5} />
-                    {p.status === 'live' ? (
-                      <span className="font-lab text-[10px] text-bio-500">{p.tag}</span>
-                    ) : (
-                      <span className="font-lab text-[10px] text-slate-600">{p.tag}</span>
-                    )}
-                  </div>
-                  <h3 className="font-bold text-[15px] mb-2 text-white">{p.title}</h3>
-                  <p className="text-[13px] text-slate-500 leading-relaxed mb-5">{p.desc}</p>
-                  <span className="mt-auto inline-flex items-center gap-1 text-[12px] font-medium text-slate-600 group-hover:text-bio-400 transition-colors">
-                    {p.status === 'live' ? 'Open studio' : 'View roadmap'}
-                    <ArrowUpRight size={12} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      {/* ---------------------------------------------------------------- Tools */}
+      <section id="tools" className="relative max-w-7xl mx-auto px-6 pt-24 pb-20">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto mb-14">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">Explore Our <span className="text-emerald-600">Tools</span></h2>
+          <p className="text-slate-500 text-[15px]">A complete pipeline to design, evaluate, and analyze proteins — all in one place.</p>
+        </motion.div>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {TOOLS.map((t, i) => (
+            <motion.div key={t.title} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUpVariant}
+              transition={{ duration: 0.45, delay: i * 0.08 }}
+              className="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
+              <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${t.tint}`}>
+                    <t.icon size={20} strokeWidth={1.75} />
                   </span>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* --------------------------------------------------------- Live preview */}
-      <section className="relative py-24 border-b border-white/[0.06]">
-        <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-14 items-center">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-          >
-            <p className="font-lab text-[11px] tracking-[0.2em] text-slate-500 uppercase mb-3">// real structures, live</p>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-5">
-              The same viewer your results open in
-            </h2>
-            <p className="text-slate-400 text-[15px] leading-relaxed mb-8 max-w-md">
-              Every backbone RFdiffusion generates opens directly in this
-              molecular viewer — rotate, zoom and inspect a structure the
-              moment a job finishes, no external tools required.
-            </p>
-            <div className="space-y-0 border-t border-white/10">
-              {STAGES.map((s) => (
-                <div key={s.name} className="flex items-center gap-4 py-3.5 border-b border-white/10">
-                  <s.icon size={16} className="text-bio-500 shrink-0" strokeWidth={1.5} />
-                  <div>
-                    <p className="text-[13px] font-semibold text-white">
-                      {s.name} <span className="text-slate-600 font-normal font-lab">· {s.label}</span>
-                    </p>
-                    <p className="text-[12px] text-slate-500">{s.desc}</p>
-                  </div>
+                  <span className={`text-[10px] font-bold tracking-wide px-2 py-1 rounded-full ${t.tagTint}`}>{t.tag}</span>
                 </div>
-              ))}
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6 }}
-            className="relative border border-white/10 p-1.5"
-          >
-            <LiveMoleculePreview className="h-80 sm:h-96 w-full" />
-            <p className="absolute bottom-3.5 left-4 font-lab text-[10px] text-slate-500 tracking-wide">
-              PDB 1EMA · GFP · cartoon / spectrum
-            </p>
-          </motion.div>
+                <h3 className="font-bold text-lg mb-2">{t.title}</h3>
+                <p className="text-[13px] text-slate-500 leading-relaxed mb-4 min-h-[3.5rem]">{t.desc}</p>
+              </div>
+              <div className={`mx-6 rounded-xl ${t.tint} h-32 flex items-center justify-center mb-5`}>
+                <t.icon size={44} strokeWidth={1} className="opacity-40" />
+              </div>
+              <div className="px-6 pb-6">
+                <ul className="space-y-1.5 mb-5">
+                  {t.bullets.map((b) => (
+                    <li key={b} className="flex items-center gap-2 text-[12.5px] text-slate-600 font-medium">
+                      <span className="h-1 w-1 rounded-full bg-slate-400 shrink-0" /> {b}
+                    </li>
+                  ))}
+                </ul>
+                <Link to={t.to} className={`inline-flex items-center justify-center gap-1.5 w-full rounded-lg px-4 py-2.5 text-[13px] font-bold text-white transition-colors ${t.buttonClass}`}>
+                  Get Started <ArrowRight size={14} strokeWidth={2.5} />
+                </Link>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      {/* -------------------------------------------------------------- CTA */}
-      <section className="relative py-24 border-b border-white/[0.06]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: '-80px' }}
-            variants={fadeUp}
-            transition={{ duration: 0.5 }}
-            className="relative border border-white/10 px-8 py-16"
-          >
-            <div className="absolute inset-0 lab-grid opacity-40 pointer-events-none" />
-            <p className="relative font-lab text-[11px] tracking-[0.2em] text-slate-500 uppercase mb-5">contigs=&quot;A:60&quot; hotspot=&quot;A239,A256&quot;</p>
-            <h2 className="relative text-3xl sm:text-4xl font-black tracking-tight mb-4">
-              Your first design is a contig away.
-            </h2>
-            <p className="relative text-slate-400 text-[15px] mb-8 max-w-md mx-auto">
-              Pick a preset, set a target, and let RFdiffusion generate a
-              backbone in minutes on a real GPU.
-            </p>
-            <Link
-              to="/rfdiffusion"
-              className="relative inline-flex items-center gap-2 bg-bio-500 px-6 py-3 text-sm font-bold text-lab-950 transition-colors hover:bg-bio-400"
-            >
-              Launch RFdiffusion Studio <ArrowUpRight size={15} strokeWidth={2.5} />
-            </Link>
-          </motion.div>
-        </div>
+      {/* ---------------------------------------------------------------- Why */}
+      <section className="relative max-w-7xl mx-auto px-6 py-20">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">Why Choose <span className="text-emerald-600">BioGen AI</span>?</h2>
+          <p className="text-slate-500 text-[15px]">Designed for researchers. Built to remove barriers. Focused on real impact.</p>
+        </motion.div>
+        <IconGrid columns={5} items={[
+          { icon: Clock, title: 'Save Time', desc: 'Go from idea to candidate in hours, not weeks.' },
+          { icon: Coins, title: 'Cost-Effective', desc: 'Access powerful tools without expensive hardware or software.' },
+          { icon: Cloud, title: 'No GPU Limitation', desc: 'Run complex computations on our cloud infrastructure — no local GPU needed.' },
+          { icon: LayoutGrid, title: 'All-in-One Platform', desc: 'Design, screen, and simulate in a single, easy-to-use platform.' },
+          { icon: Trophy, title: 'Accelerate Research', desc: 'Focus on science, not infrastructure. Turn ideas into real-world solutions.' },
+        ]} />
       </section>
 
-      {/* ------------------------------------------------------------ Footer */}
-      <footer className="relative py-10">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2 font-lab text-[12px]">
-            <span className="text-bio-500">biogen.ai</span>
-            <span className="text-slate-600">— protein design studio</span>
-          </div>
-          <div className="flex items-center gap-6 text-[12px] text-slate-500">
-            <Link to="/about" className="hover:text-slate-300 transition-colors flex items-center gap-1.5">
-              <Users size={13} /> About Us
-            </Link>
-            <a
-              href="https://github.com/sokrypton/RFdiffusion"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-slate-300 transition-colors flex items-center gap-1.5"
-            >
-              <ExternalLink size={13} /> RFdiffusion
-            </a>
-          </div>
-        </div>
-      </footer>
+      {/* ---------------------------------------------------------------- How */}
+      <section className="relative max-w-6xl mx-auto px-6 py-20">
+        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
+          className="text-center max-w-2xl mx-auto mb-14">
+          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">How It Works</h2>
+          <p className="text-slate-500 text-[15px]">A simple workflow from design to discovery.</p>
+        </motion.div>
+        <HowItWorks steps={[
+          { icon: Upload, title: 'Input', desc: 'Provide your sequence, structure, or design goal.' },
+          { icon: Settings, title: 'Run Tool', desc: 'Design, screen, or simulate using our integrated tools.' },
+          { icon: BarChart3, title: 'Analyze', desc: 'Visualize and interpret results.' },
+          { icon: Cpu, title: 'Discover', desc: 'Identify promising candidates for further validation.' },
+        ]} />
+      </section>
+
+      {/* ---------------------------------------------------------------- CTA */}
+      <section className="relative max-w-6xl mx-auto px-6 pb-24">
+        <CTABanner
+          tone="light"
+          eyebrow="Ready to start?"
+          title="Turn Your Ideas Into Real Proteins"
+          description="Join BioGen AI and be part of a growing community advancing computational biology for a healthier tomorrow."
+          buttonLabel="Get Started Now"
+          buttonTo="/rfdiffusion"
+        />
+      </section>
+
+      <SiteFooter />
     </div>
   );
 }

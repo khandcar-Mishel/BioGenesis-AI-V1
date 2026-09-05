@@ -18,7 +18,7 @@ function StageCard({ title, desc, status, active=false }: {title:string, desc:st
     <div className="border border-slate-200 bg-slate-50 p-4 rounded-lg">
       <div className="flex justify-between items-center mb-1">
         <h3 className="font-bold text-sm text-slate-800">{title}</h3>
-        <span className={`text-xs font-bold ${active ? 'text-sky-600' : 'text-slate-500'}`}>{status}</span>
+        <span className={`text-xs font-bold ${active ? 'text-emerald-600' : 'text-slate-500'}`}>{status}</span>
       </div>
       <p className="text-xs text-slate-500">{desc}</p>
     </div>

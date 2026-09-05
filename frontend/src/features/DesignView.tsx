@@ -196,7 +196,7 @@ export function DesignView() {
               <input 
                 value={pdbInput} onChange={(e) => setPdbInput(e.target.value)}
                 placeholder="e.g. 4N5T"
-                className="border border-slate-300 rounded-lg px-2 py-1.5 w-24 bg-white focus:outline-sky-500 shadow-sm" 
+                className="border border-slate-300 rounded-lg px-2 py-1.5 w-24 bg-white focus:outline-emerald-500 shadow-sm" 
               />
               <button onClick={handleRetrieve} disabled={structureStatus === 'loading'} className="bg-white border border-slate-300 text-slate-700 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition shadow-sm font-semibold disabled:opacity-50">
                 Retrieve
@@ -217,8 +217,8 @@ export function DesignView() {
           )}
           
           {structureStatus === 'loading' && (
-            <div className="bg-sky-50 border border-sky-200 text-sky-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <Loader2 size={16} className="animate-spin text-sky-500 shrink-0" />
+            <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
+              <Loader2 size={16} className="animate-spin text-emerald-500 shrink-0" />
               Loading structure...
             </div>
           )}
@@ -247,7 +247,7 @@ export function DesignView() {
               <label className="block font-semibold text-slate-700 mb-1">Design name</label>
               <input 
                 value={designName} onChange={(e) => setDesignName(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-sky-500 shadow-sm"
+                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-emerald-500 shadow-sm"
               />
             </div>
             <div>
@@ -255,7 +255,7 @@ export function DesignView() {
               <div className="relative">
                 <select 
                   value={designType} onChange={(e) => setDesignType(e.target.value)}
-                  className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-sky-500 shadow-sm appearance-none"
+                  className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-emerald-500 shadow-sm appearance-none"
                 >
                   <option>Binder Design</option>
                   <option>Unconditional</option>
@@ -272,14 +272,14 @@ export function DesignView() {
               <div className="relative flex-1">
                 <select 
                   value={presetTemplate} onChange={(e) => setPresetTemplate(e.target.value)}
-                  className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-sky-500 shadow-sm appearance-none"
+                  className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-emerald-500 shadow-sm appearance-none"
                 >
                   <option value="pdl1_binder">pdl1_binder</option>
                   <option value="custom">custom</option>
                 </select>
                 <ChevronDown size={14} className="absolute right-2 top-2 text-slate-500 pointer-events-none" />
               </div>
-              <button className="text-sky-600 font-semibold hover:underline">View preset details</button>
+              <button className="text-emerald-600 font-semibold hover:underline">View preset details</button>
             </div>
           </div>
           
@@ -288,7 +288,7 @@ export function DesignView() {
               <label className="block font-semibold text-slate-700 mb-1">Design region (Contigs)</label>
               <input 
                 value={contigs} onChange={(e) => setContigs(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-sky-500 shadow-sm mb-1"
+                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-emerald-500 shadow-sm mb-1"
               />
               <span className="text-[10px] text-slate-400">e.g. A:50-70</span>
             </div>
@@ -296,7 +296,7 @@ export function DesignView() {
               <label className="block font-semibold text-slate-700 mb-1">Binding hotspots <span className="font-normal text-slate-400">(Optional)</span></label>
               <input 
                 value={hotspots} onChange={(e) => setHotspots(e.target.value)}
-                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-sky-500 shadow-sm mb-1"
+                className="w-full border border-slate-300 rounded-lg px-2 py-1.5 bg-white focus:outline-emerald-500 shadow-sm mb-1"
               />
               <span className="text-[10px] text-slate-400">e.g. E64,E88</span>
             </div>
@@ -343,24 +343,24 @@ export function DesignView() {
               </div>
             </div>
             <div className="flex items-center gap-1.5 mb-1 cursor-pointer ml-1" onClick={() => setSymmetry(!symmetry)}>
-              <input type="checkbox" checked={symmetry} readOnly className="w-3.5 h-3.5 rounded border-slate-300 text-sky-600 focus:ring-sky-500 pointer-events-none" />
+              <input type="checkbox" checked={symmetry} readOnly className="w-3.5 h-3.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 pointer-events-none" />
               <span className="text-slate-700 text-[11px] font-medium">Symmetry & Potentials</span>
             </div>
           </div>
 
           {!isGenerating ? (
-            <button onClick={handleGenerate} className="w-full bg-[#0060df] hover:bg-[#0050b3] text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition shadow-sm text-[13px]">
+            <button onClick={handleGenerate} className="w-full bg-[#059669] hover:bg-[#047857] text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition shadow-sm text-[13px]">
               <Zap size={14} fill="white" />
               Generate designs
             </button>
           ) : (
-            <div className="bg-sky-50 p-2.5 border border-sky-100 rounded-lg">
+            <div className="bg-emerald-50 p-2.5 border border-emerald-100 rounded-lg">
               <div className="flex justify-between text-[12px] font-bold text-slate-800 mb-1.5">
                 <span>Generating designs...</span>
                 <span>{progress}%</span>
               </div>
               <div className="w-full bg-slate-200 rounded-full h-1.5 mb-1.5">
-                <div className="bg-[#0060df] h-full rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
+                <div className="bg-[#059669] h-full rounded-full transition-all duration-300" style={{ width: `${progress}%` }}></div>
               </div>
               <div className="text-right text-[10px] text-slate-500">
                 Elapsed: {elapsed}
@@ -383,7 +383,7 @@ export function DesignView() {
           )}
 
           {!isGenerating && !jobFailed && progress >= 100 && (
-            <Link to="/rfdiffusion/results" className="mt-3 block bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2.5 rounded-lg text-[12px] font-bold text-center hover:bg-emerald-100 transition">
+            <Link to="/rfdiffusion/studio/results" className="mt-3 block bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2.5 rounded-lg text-[12px] font-bold text-center hover:bg-emerald-100 transition">
               Generation complete — view results →
             </Link>
           )}

@@ -73,7 +73,7 @@ export function ResultsView() {
                 <button
                   onClick={handleDownloadZip}
                   title="Download all results as zip"
-                  className="flex items-center gap-1.5 text-[11px] font-bold text-sky-600 hover:text-sky-700 border border-sky-200 hover:border-sky-300 rounded-md px-2 py-1 transition"
+                  className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 hover:text-emerald-700 border border-emerald-200 hover:border-emerald-300 rounded-md px-2 py-1 transition"
                 >
                   <FileArchive size={13} /> Download all
                 </button>
@@ -85,8 +85,8 @@ export function ResultsView() {
                 onClick={() => setSelectedIdx(idx)}
                 className={`p-3 border rounded-md cursor-pointer transition ${
                   selectedIdx === idx
-                    ? 'bg-sky-50 border-sky-300 ring-1 ring-sky-200'
-                    : 'border-slate-200 bg-slate-50 hover:bg-sky-50 hover:border-sky-200'
+                    ? 'bg-emerald-50 border-emerald-300 ring-1 ring-emerald-200'
+                    : 'border-slate-200 bg-slate-50 hover:bg-emerald-50 hover:border-emerald-200'
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -100,7 +100,7 @@ export function ResultsView() {
                       handleDownload(file);
                     }}
                     title="Download PDB"
-                    className="text-slate-400 hover:text-sky-600 transition"
+                    className="text-slate-400 hover:text-emerald-600 transition"
                   >
                     <Download size={16} />
                   </button>
