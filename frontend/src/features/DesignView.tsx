@@ -383,7 +383,7 @@ export function DesignView() {
           )}
 
           {!isGenerating && !jobFailed && progress >= 100 && (
-            <Link to="/results" className="mt-3 block bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2.5 rounded-lg text-[12px] font-bold text-center hover:bg-emerald-100 transition">
+            <Link to="/rfdiffusion/results" className="mt-3 block bg-emerald-50 border border-emerald-200 text-emerald-700 px-3 py-2.5 rounded-lg text-[12px] font-bold text-center hover:bg-emerald-100 transition">
               Generation complete — view results →
             </Link>
           )}

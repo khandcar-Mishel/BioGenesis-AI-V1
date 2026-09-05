@@ -108,7 +108,7 @@ export function SettingsView() {
     setConnectionStatus(true, now);
 
     // Quick success redirect
-    navigate('/');
+    navigate('/rfdiffusion');
   };
 
   return (
