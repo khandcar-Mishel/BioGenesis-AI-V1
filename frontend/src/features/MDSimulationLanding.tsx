@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight, Waves, ShieldCheck, Activity, Link2, FileSearch, Upload,
-  Settings, Play, BarChart3, Download, Boxes,
-} from 'lucide-react';
+  ArrowRight, Waves, ShieldCheck, Pulse, Link as LinkIcon, FileMagnifyingGlass, Upload,
+  Gear, Play, ChartBar, Download, Stack,
+} from '@phosphor-icons/react';
 import { Navbar } from '../components/Navbar';
 import { SiteFooter } from '../components/SiteFooter';
 import { HeroVisual } from '../components/HeroVisual';
@@ -19,15 +19,15 @@ const ANALYSES = [
 
 export function MDSimulationLanding() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="marketing-page min-h-screen text-slate-900">
       <Navbar />
 
-      <section className="relative hero-wash pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+      <section id="main-content" className="relative hero-wash pt-16 pb-24">
+        <div className="site-container grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full bg-sky-50 border border-sky-100 px-3.5 py-1.5 mb-6">
-              <Waves size={12} className="text-sky-600" />
+              <Waves size={12} weight="duotone" className="text-sky-600" />
               <span className="text-[11px] font-bold text-sky-700 tracking-wide uppercase">Molecular Dynamics Studio</span>
             </motion.div>
 
@@ -46,7 +46,7 @@ export function MDSimulationLanding() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
               className="flex flex-wrap items-center gap-3">
               <Link to="/md-simulation/workspace" className="inline-flex items-center gap-2 rounded-lg bg-sky-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-sky-700">
-                Open MD Simulation Workspace <ArrowRight size={15} strokeWidth={2.5} />
+                Open MD Simulation Workspace <ArrowRight size={15} weight="bold" />
               </Link>
               <a href="#analyses" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
                 Learn More
@@ -61,9 +61,9 @@ export function MDSimulationLanding() {
       </section>
 
       <BenefitStrip items={[
-        { icon: Boxes, label: 'Atomic-level accuracy' },
-        { icon: Activity, label: 'Realistic dynamic environment' },
-        { icon: BarChart3, label: 'Comprehensive analysis' },
+        { icon: Stack, label: 'Atomic-level accuracy' },
+        { icon: Pulse, label: 'Realistic dynamic environment' },
+        { icon: ChartBar, label: 'Comprehensive analysis' },
         { icon: ShieldCheck, label: 'Support experimental design' },
       ]} />
 
@@ -80,8 +80,8 @@ export function MDSimulationLanding() {
         <IconGrid columns={4} items={[
           { icon: ShieldCheck, title: 'Validate Structural Stability', desc: 'Assess whether the designed protein maintains its structure under realistic conditions.' },
           { icon: Waves, title: 'Understand Flexibility', desc: 'Explore conformational changes and identify flexible regions.' },
-          { icon: Link2, title: 'Analyze Interactions', desc: 'Study interactions with targets, ligands, or the environment (e.g., water, ions, membranes).' },
-          { icon: FileSearch, title: 'Guide Experimental Design', desc: 'Provide insights to support further optimization and laboratory validation.' },
+          { icon: LinkIcon, title: 'Analyze Interactions', desc: 'Study interactions with targets, ligands, or the environment (e.g., water, ions, membranes).' },
+          { icon: FileMagnifyingGlass, title: 'Guide Experimental Design', desc: 'Provide insights to support further optimization and laboratory validation.' },
         ]} />
       </section>
 
@@ -93,9 +93,9 @@ export function MDSimulationLanding() {
         </motion.div>
         <HowItWorks steps={[
           { icon: Upload, title: 'Input Structure', desc: 'Upload a PDB file from RFdiffusion or other sources.' },
-          { icon: Settings, title: 'Set Parameters', desc: 'Define simulation conditions (e.g., force field, time, solvent).' },
+          { icon: Gear, title: 'Set Parameters', desc: 'Define simulation conditions (e.g., force field, time, solvent).' },
           { icon: Play, title: 'Run Simulation', desc: 'Perform MD simulation on GPU infrastructure.' },
-          { icon: BarChart3, title: 'Analyze Results', desc: 'Visualize and analyze key metrics and structural changes.' },
+          { icon: ChartBar, title: 'Analyze Results', desc: 'Visualize and analyze key metrics and structural changes.' },
           { icon: Download, title: 'Download & Report', desc: 'Get trajectories, analysis plots, and summary reports.' },
         ]} />
       </section>
@@ -127,9 +127,9 @@ export function MDSimulationLanding() {
         </motion.div>
         <IconGrid columns={4} items={[
           { icon: ShieldCheck, title: 'Stability Assessment', desc: 'Evaluate structural stability of designed proteins and peptides.' },
-          { icon: Link2, title: 'Binding Analysis', desc: 'Study interactions with targets, ligands, or membranes.' },
-          { icon: Boxes, title: 'Conformational Dynamics', desc: 'Explore functional motions and structural transitions.' },
-          { icon: FileSearch, title: 'Pre-experimental Validation', desc: 'Provide computational evidence to support laboratory studies.' },
+          { icon: LinkIcon, title: 'Binding Analysis', desc: 'Study interactions with targets, ligands, or membranes.' },
+          { icon: Stack, title: 'Conformational Dynamics', desc: 'Explore functional motions and structural transitions.' },
+          { icon: FileMagnifyingGlass, title: 'Pre-experimental Validation', desc: 'Provide computational evidence to support laboratory studies.' },
         ]} />
       </section>
 

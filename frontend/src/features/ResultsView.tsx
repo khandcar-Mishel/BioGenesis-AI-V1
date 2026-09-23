@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Download, Loader2, FileArchive } from 'lucide-react';
+import { Download, CircleNotch, FileZip } from '@phosphor-icons/react';
 import { MolecularViewer } from './MolecularViewer';
 import { useAppStore } from '../stores/appStore';
 import { getJobResult, downloadResult, downloadResultsZip } from '../services/api';
@@ -75,7 +75,7 @@ export function ResultsView() {
                   title="Download all results as zip"
                   className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-600 hover:text-emerald-700 border border-emerald-200 hover:border-emerald-300 rounded-md px-2 py-1 transition"
                 >
-                  <FileArchive size={13} /> Download all
+                  <FileZip size={13} weight="regular" /> Download all
                 </button>
               )}
             </div>
@@ -102,7 +102,7 @@ export function ResultsView() {
                     title="Download PDB"
                     className="text-slate-400 hover:text-emerald-600 transition"
                   >
-                    <Download size={16} />
+                    <Download size={16} weight="regular" />
                   </button>
                 </div>
               </div>
@@ -140,7 +140,7 @@ export function ResultsView() {
               <MolecularViewer pdbData={pdbData} />
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-sm font-medium">
-                <Loader2 size={18} className="animate-spin mr-2" /> Loading structure...
+                <CircleNotch size={18} weight="regular" className="animate-spin mr-2" /> Loading structure...
               </div>
             )
           ) : (

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  BookOpen, Users, Code2, Globe, Target, Eye, Heart, User,
-  MessageSquare, Mail, Send, Lightbulb, ExternalLink, CheckCircle2,
-} from 'lucide-react';
+  BookOpen, Users, Code, Globe, Target, Eye, Heart, User,
+  ChatCircle, Envelope, PaperPlaneTilt, Lightbulb, ArrowSquareOut, CheckCircle,
+} from '@phosphor-icons/react';
 import { Navbar } from '../components/Navbar';
 import { SiteFooter } from '../components/SiteFooter';
 import { HeroVisual } from '../components/HeroVisual';
@@ -32,15 +32,15 @@ export function AboutUsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="marketing-page min-h-screen text-slate-900">
       <Navbar />
 
-      <section className="relative hero-wash pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+      <section id="main-content" className="relative hero-wash pt-16 pb-24">
+        <div className="site-container grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 mb-6">
-              <Users size={12} className="text-emerald-600" />
+              <Users size={12} weight="duotone" className="text-emerald-600" />
               <span className="text-[11px] font-bold text-emerald-700 tracking-wide uppercase">About BioGen AI</span>
             </motion.div>
 
@@ -61,12 +61,12 @@ export function AboutUsPage() {
               {[
                 { icon: BookOpen, label: 'Research Driven' },
                 { icon: Users, label: 'Student Led' },
-                { icon: Code2, label: 'Open Science' },
+                { icon: Code, label: 'Open Science' },
                 { icon: Globe, label: 'Real-World Impact' },
               ].map((b) => (
                 <div key={b.label} className="flex items-center gap-2">
                   <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600 shrink-0">
-                    <b.icon size={15} strokeWidth={1.75} />
+                    <b.icon size={15} weight="duotone" />
                   </span>
                   <span className="text-[12px] font-semibold text-slate-600 leading-tight">{b.label}</span>
                 </div>
@@ -120,7 +120,7 @@ export function AboutUsPage() {
               transition={{ duration: 0.45, delay: i * 0.08 }}
               className="rounded-2xl border border-slate-200 p-6 flex gap-5 bg-white">
               <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-emerald-50 text-emerald-500">
-                <User size={26} strokeWidth={1.5} />
+                <User size={26} weight="duotone" />
               </span>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
@@ -130,7 +130,7 @@ export function AboutUsPage() {
                 <p className="text-[12px] text-slate-500 font-medium mb-2">{m.focus}</p>
                 <p className="text-[13px] text-slate-500 leading-relaxed mb-3">{m.bio}</p>
                 <a href={REPO_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-[12.5px] font-bold text-emerald-700 hover:text-emerald-800">
-                  View GitHub Profile <ExternalLink size={12} />
+                  View GitHub Profile <ArrowSquareOut size={12} weight="regular" />
                 </a>
               </div>
             </motion.div>
@@ -147,7 +147,7 @@ export function AboutUsPage() {
 
             {sent ? (
               <div className="rounded-xl border border-emerald-200 bg-emerald-50 p-6 flex items-start gap-3">
-                <CheckCircle2 size={18} className="text-emerald-600 shrink-0 mt-0.5" />
+                <CheckCircle size={18} weight="fill" className="text-emerald-600 shrink-0 mt-0.5" />
                 <p className="text-[13.5px] text-emerald-800">
                   Your email client should have opened with this message pre-filled — send it from there and we&rsquo;ll get back to you.
                 </p>
@@ -170,7 +170,7 @@ export function AboutUsPage() {
                 <textarea required rows={5} placeholder="Your message…" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })}
                   className="w-full rounded-lg border border-slate-300 px-3.5 py-2.5 text-[13.5px] outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-100 resize-none" />
                 <button type="submit" className="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
-                  <Send size={15} /> Send Message
+                  <PaperPlaneTilt size={15} weight="regular" /> Send Message
                 </button>
                 <p className="text-center text-[11.5px] text-slate-400">Opens your email client — we typically respond within 2-3 business days.</p>
               </form>
@@ -181,12 +181,12 @@ export function AboutUsPage() {
             className="rounded-2xl bg-emerald-50 border border-emerald-100 p-6 space-y-5 h-fit">
             <h3 className="font-bold text-[14px] text-slate-800">Other Ways to Connect</h3>
             {[
-              { icon: Code2, title: 'GitHub', desc: 'Check out our repositories, open issues, or start a discussion.', href: REPO_URL },
-              { icon: MessageSquare, title: 'Discussions', desc: 'We are open to collaborations, research discussions, and feedback from the community.', href: `${REPO_URL}/discussions` },
-              { icon: Mail, title: 'General Inquiries', desc: 'Feel free to reach out through the contact form.', href: `mailto:${CONTACT_EMAIL}` },
+              { icon: Code, title: 'GitHub', desc: 'Check out our repositories, open issues, or start a discussion.', href: REPO_URL },
+              { icon: ChatCircle, title: 'Discussions', desc: 'We are open to collaborations, research discussions, and feedback from the community.', href: `${REPO_URL}/discussions` },
+              { icon: Envelope, title: 'General Inquiries', desc: 'Feel free to reach out through the contact form.', href: `mailto:${CONTACT_EMAIL}` },
             ].map((item) => (
               <a key={item.title} href={item.href} target="_blank" rel="noreferrer" className="flex items-start gap-3 group">
-                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-emerald-600 shrink-0"><item.icon size={16} /></span>
+                <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-emerald-600 shrink-0"><item.icon size={16} weight="duotone" /></span>
                 <div>
                   <p className="text-[13px] font-bold text-slate-800 group-hover:text-emerald-700 transition-colors">{item.title}</p>
                   <p className="text-[12px] text-slate-500 leading-relaxed">{item.desc}</p>
@@ -194,13 +194,13 @@ export function AboutUsPage() {
               </a>
             ))}
             <div className="border-t border-emerald-100 pt-4 flex items-start gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-emerald-600 shrink-0"><Lightbulb size={16} /></span>
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white text-emerald-600 shrink-0"><Lightbulb size={16} weight="duotone" /></span>
               <div>
                 <p className="text-[13px] font-bold text-slate-800 mb-1">Have a Question or Feature Request?</p>
                 <p className="text-[12px] text-slate-500 leading-relaxed mb-2">Help us improve BioGen AI! Share your ideas, report issues, or suggest new features on our GitHub.</p>
                 <a href={`${REPO_URL}/issues`} target="_blank" rel="noreferrer"
                   className="inline-flex items-center gap-1 text-[12px] font-bold rounded-lg border border-emerald-300 px-3 py-1.5 text-emerald-700 hover:bg-white transition-colors">
-                  Open GitHub Issues <ExternalLink size={11} />
+                  Open GitHub Issues <ArrowSquareOut size={11} weight="regular" />
                 </a>
               </div>
             </div>

@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Link, useLocation, Navigate } from 'react-router-dom';
 import {
-  Settings, Database, LayoutGrid, Folder, Clock, XCircle, Hammer,
-  Microscope, Waves, ArrowLeft, Dna, BookOpen, HelpCircle, Cloud,
-} from 'lucide-react';
+  Gear, Database, SquaresFour, Folder, Clock, XCircle, Hammer,
+  Microscope, Waves, ArrowLeft, Dna, BookOpen, Question, Cloud,
+} from '@phosphor-icons/react';
 import { DesignView } from './features/DesignView';
 import { AnalyzeView } from './features/AnalyzeView';
 import { ResultsView } from './features/ResultsView';
@@ -20,6 +20,7 @@ import { useEffect } from 'react';
 export default function App() {
   return (
     <BrowserRouter>
+      <RouteScrollReset />
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
@@ -66,7 +67,7 @@ export default function App() {
           path="/results"
           element={
             <ComingSoon
-              icon={LayoutGrid}
+              icon={SquaresFour}
               eyebrow="Unified library"
               title="Results Library"
               description="A single, searchable library of every design, sequence and structure produced across RFdiffusion, Screening and MD Simulation — not just the current session."
@@ -84,6 +85,15 @@ export default function App() {
       </Routes>
     </BrowserRouter>
   );
+}
+
+/** Marketing links start at the top; hash links keep their section target. */
+function RouteScrollReset() {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [pathname, hash]);
+  return null;
 }
 
 /** The working RFdiffusion studio — Design / Analyze / Results / Settings. */
@@ -107,10 +117,10 @@ function RFdiffusionStudio() {
             <Route path="/analyze" element={<AnalyzeView />} />
             <Route path="/results" element={<ResultsView />} />
             <Route path="/settings" element={<SettingsView />} />
-            <Route path="/examples" element={<PlaceholderPage icon={<BookOpen size={20} />} title="Examples" message="A gallery of ready-to-run presets (binder design, motif scaffolding, symmetric oligomers) is coming here. For now, pick a preset template directly from the Design panel." />} />
-            <Route path="/projects" element={<PlaceholderPage icon={<Folder size={20} />} title="Projects" message="Project workspaces are coming in a future release. All designs you generate stay available under Results." />} />
-            <Route path="/history" element={<PlaceholderPage icon={<Clock size={20} />} title="History" message="A run history log is coming in a future release." />} />
-            <Route path="/help" element={<PlaceholderPage icon={<HelpCircle size={20} />} title="Help" message="Docs are on the way. In the meantime, hover the (?) icons next to each field for guidance, or reach out from the About Us page." />} />
+            <Route path="/examples" element={<PlaceholderPage icon={<BookOpen size={20} weight="regular" />} title="Examples" message="A gallery of ready-to-run presets (binder design, motif scaffolding, symmetric oligomers) is coming here. For now, pick a preset template directly from the Design panel." />} />
+            <Route path="/projects" element={<PlaceholderPage icon={<Folder size={20} weight="regular" />} title="Projects" message="Project workspaces are coming in a future release. All designs you generate stay available under Results." />} />
+            <Route path="/history" element={<PlaceholderPage icon={<Clock size={20} weight="regular" />} title="History" message="A run history log is coming in a future release." />} />
+            <Route path="/help" element={<PlaceholderPage icon={<Question size={20} weight="regular" />} title="Help" message="Docs are on the way. In the meantime, hover the (?) icons next to each field for guidance, or reach out from the About Us page." />} />
             <Route path="*" element={<Navigate to="/rfdiffusion/studio" replace />} />
           </Routes>
         </main>
@@ -159,7 +169,7 @@ function Header() {
           </div>
         ) : (
           <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white border border-red-300 text-red-600 font-bold text-[11.5px]">
-            <XCircle size={13} className="text-red-500" />
+            <XCircle size={13} weight="regular" className="text-red-500" />
             GPU Disconnected
           </div>
         )}
@@ -176,36 +186,36 @@ function Sidebar() {
         <div className="mb-6">
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">WORKSPACE</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion/studio" end icon={<Dna size={18}/>} label="RFdiffusion" />
-            <SidebarLink to="/rfdiffusion/studio/examples" icon={<BookOpen size={18}/>} label="Examples" />
-            <SidebarLink to="/rfdiffusion/studio/analyze" icon={<Database size={18}/>} label="Analyze" />
-            <SidebarLink to="/rfdiffusion/studio/results" icon={<LayoutGrid size={18}/>} label="Results" />
+            <SidebarLink to="/rfdiffusion/studio" end icon={<Dna size={18} weight="regular" />} label="RFdiffusion" />
+            <SidebarLink to="/rfdiffusion/studio/examples" icon={<BookOpen size={18} weight="regular" />} label="Examples" />
+            <SidebarLink to="/rfdiffusion/studio/analyze" icon={<Database size={18} weight="regular" />} label="Analyze" />
+            <SidebarLink to="/rfdiffusion/studio/results" icon={<SquaresFour size={18} weight="regular" />} label="Results" />
           </div>
         </div>
 
         <div className="mb-6">
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">PROJECT</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion/studio/projects" icon={<Folder size={18}/>} label="Projects" />
-            <SidebarLink to="/rfdiffusion/studio/history" icon={<Clock size={18}/>} label="History" />
+            <SidebarLink to="/rfdiffusion/studio/projects" icon={<Folder size={18} weight="regular" />} label="Projects" />
+            <SidebarLink to="/rfdiffusion/studio/history" icon={<Clock size={18} weight="regular" />} label="History" />
           </div>
         </div>
 
         <div>
           <p className="text-[11px] font-bold text-slate-400 mb-3 px-2 tracking-wider">SYSTEM</p>
           <div className="space-y-1">
-            <SidebarLink to="/rfdiffusion/studio/settings" icon={<Settings size={18}/>} label="Settings" status={isBackendConnected ? 'online' : 'offline'} />
-            <SidebarLink to="/rfdiffusion/studio/help" icon={<HelpCircle size={18}/>} label="Help" />
+            <SidebarLink to="/rfdiffusion/studio/settings" icon={<Gear size={18} weight="regular" />} label="Settings" status={isBackendConnected ? 'online' : 'offline'} />
+            <SidebarLink to="/rfdiffusion/studio/help" icon={<Question size={18} weight="regular" />} label="Help" />
           </div>
         </div>
       </div>
 
       <div className="p-3 border-t border-slate-100 space-y-1">
         <div className="flex items-center gap-2 px-3 py-2 text-[11px] font-semibold text-slate-400">
-          <Cloud size={13} /> Serverless GPU via Modal
+          <Cloud size={13} weight="regular" /> Serverless GPU via Modal
         </div>
         <Link to="/" className="flex items-center gap-2 px-3 py-2 rounded-lg text-[12px] font-semibold text-slate-400 hover:text-slate-700 hover:bg-slate-50 transition-colors">
-          <ArrowLeft size={14} /> Back to Home
+          <ArrowLeft size={14} weight="regular" /> Back to Home
         </Link>
       </div>
     </div>
@@ -237,7 +247,7 @@ function PlaceholderPage({ icon, title, message }: { icon: React.ReactNode, titl
         <h2 className="text-lg font-black text-slate-800 mb-2 tracking-tight">{title}</h2>
         <p className="text-[13px] text-slate-500 font-medium mb-4">{message}</p>
         <div className="inline-flex items-center gap-1.5 text-[11px] font-bold text-slate-400 uppercase tracking-wider">
-          <Hammer size={12} /> Under construction
+          <Hammer size={12} weight="regular" /> Under construction
         </div>
       </div>
     </div>

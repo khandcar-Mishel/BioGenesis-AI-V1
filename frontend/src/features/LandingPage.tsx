@@ -1,198 +1,78 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import {
-  ArrowRight, Dna, Microscope, Waves, Cpu, Database, Users, Zap,
-  Clock, Coins, Cloud, LayoutGrid, Rocket, Upload, Settings, BarChart3, Trophy,
-} from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ArrowDown, Check, Cube, Cloud, SlidersHorizontal, Export, UploadSimple, ChartLine, Flask, CursorClick } from '@phosphor-icons/react';
 import { Navbar } from '../components/Navbar';
 import { SiteFooter } from '../components/SiteFooter';
 import { HeroVisual } from '../components/HeroVisual';
-import { BenefitStrip, IconGrid, HowItWorks, CTABanner, fadeUpVariant } from '../components/MarketingKit';
+import { ScienceIcon, IconTile, type ScienceKind } from '../components/ScienceIcon';
+import { PipelineArt } from '../components/PipelineArt';
+import { HowItWorks } from '../components/MarketingKit';
 
-const TOOLS = [
-  {
-    icon: Dna,
-    tint: 'bg-emerald-50 text-emerald-600',
-    tag: 'PROTEIN DESIGN',
-    tagTint: 'bg-emerald-50 text-emerald-700',
-    title: 'RFdiffusion',
-    desc: 'Generate novel protein and peptide structures using state-of-the-art diffusion models.',
-    bullets: ['De novo design', 'Target-conditioned design', 'High-quality structures'],
-    to: '/rfdiffusion',
-    buttonClass: 'bg-emerald-600 hover:bg-emerald-700',
-  },
-  {
-    icon: Microscope,
-    tint: 'bg-violet-50 text-violet-600',
-    tag: 'PEPTIDE SCREENING',
-    tagTint: 'bg-violet-50 text-violet-700',
-    title: 'Screening',
-    desc: 'Evaluate designed peptides with multiple bioinformatics tools to identify the most promising candidates.',
-    bullets: ['Toxicity & allergenicity prediction', 'Stability & solubility assessment', 'Drug-like property analysis'],
-    to: '/screening',
-    buttonClass: 'bg-violet-600 hover:bg-violet-700',
-  },
-  {
-    icon: Waves,
-    tint: 'bg-sky-50 text-sky-600',
-    tag: 'DYNAMICS & ANALYSIS',
-    tagTint: 'bg-sky-50 text-sky-700',
-    title: 'MD Simulation',
-    desc: 'Explore the dynamic behavior and stability of your designed proteins through atomic-level simulations.',
-    bullets: ['Structural stability analysis', 'Interaction with targets/ligands', 'Trajectory and conformational insights'],
-    to: '/md-simulation',
-    buttonClass: 'bg-sky-600 hover:bg-sky-700',
-  },
+const TOOLS: { kind: ScienceKind; title: string; eyebrow: string; description: string; features: string[]; to: string; action: string; status: string }[] = [
+  { kind: 'design', title: 'RFdiffusion', eyebrow: 'GENERATIVE DESIGN', description: 'Give your research a new starting point. Generate protein backbones guided by your biological target.', features: ['De novo & binder design', 'Motif scaffolding', 'Interactive structure previews'], to: '/rfdiffusion', action: 'Explore protein design', status: 'WORKSPACE AVAILABLE' },
+  { kind: 'screening', title: 'Peptide screening', eyebrow: 'CANDIDATE EVALUATION', description: 'Make a more informed shortlist. Explore tools for peptide safety, stability, and functional properties.', features: ['Toxicity & allergenicity', 'Stability & solubility', 'Physicochemical properties'], to: '/screening', action: 'Explore screening tools', status: 'TOOL DIRECTORY' },
+  { kind: 'dynamics', title: 'Molecular dynamics', eyebrow: 'STRUCTURAL INSIGHT', description: 'Go beyond a single structure. Discover how molecular simulation can reveal motion and stability.', features: ['Structural stability', 'Molecular interactions', 'Trajectory analysis'], to: '/md-simulation', action: 'Explore simulations', status: 'WORKSPACE COMING SOON' },
 ];
 
 export function LandingPage() {
-  return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <Navbar />
-
-      {/* ---------------------------------------------------------------- Hero */}
-      <section className="relative hero-wash pt-16 pb-28 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
-          <div>
-            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 mb-6">
-              <Zap size={12} className="text-emerald-600" />
-              <span className="text-[11px] font-bold text-emerald-700 tracking-wide uppercase">AI for Protein Innovation</span>
-            </motion.div>
-
-            <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.05 }}
-              className="text-4xl sm:text-5xl lg:text-[3.2rem] font-black tracking-tight leading-[1.08] mb-5">
-              From Ideas to<br /><span className="text-emerald-600">Functional Proteins.</span>
-            </motion.h1>
-
-            <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-slate-500 text-[15.5px] leading-relaxed max-w-lg mb-8">
-              BioGen AI combines state-of-the-art generative AI, biomolecular simulation, and analysis tools to
-              help researchers design, evaluate, and understand proteins and peptides — faster, easier, and more accessible.
-            </motion.p>
-
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-wrap items-center gap-3">
-              <Link to="/rfdiffusion" className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
-                Get Started <ArrowRight size={15} strokeWidth={2.5} />
-              </Link>
-              <a href="#tools" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
-                See how it works
-              </a>
-            </motion.div>
+  return <div className="marketing-page home-page">
+    <Navbar />
+    <main id="main-content">
+      <section className="home-hero">
+        <div className="hero-blueprint" aria-hidden="true" />
+        <div className="site-container hero-layout">
+          <div className="hero-copy">
+            <div className="eyebrow"><span className="status-dot" /> A NEW PERSPECTIVE ON PROTEIN DESIGN</div>
+            <h1>Small structures.<br /><span>Extraordinary</span><br /><span className="hero-last-line">possibilities.</span></h1>
+            <p className="hero-description">Bring your next biological idea into focus. Design protein structures, explore promising candidates, and understand their potential—all in one research platform.</p>
+            <div className="hero-actions">
+              <Link to="/rfdiffusion/studio" className="button-primary">Start designing <ArrowUpRight size={18} /></Link>
+              <a href="#workflow" className="button-secondary"><span className="small-play"><ArrowDown size={13} /></span> Explore the workflow</a>
+            </div>
+            <div className="hero-footnote"><span><Check size={13} weight="bold" /> No local GPU needed</span><span><Check size={13} weight="bold" /> Built for research</span></div>
           </div>
-
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.2 }}>
-            <HeroVisual
-              pdbId="1EMA"
-              colorscheme="greenCarbon"
-              handNote={'Design\nSimulate\nDiscover'}
-              statCard={{ title: 'Designed Protein', rows: [
-                { label: 'Length', value: '124 aa' },
-                { label: 'Confidence', value: '0.93' },
-                { label: 'Target', value: 'Custom' },
-                { label: 'Method', value: 'RFdiffusion' },
-              ]}}
-              checklist={['Novel structures', 'Target-specific design', 'Simulation-ready', 'Research accelerated']}
-            />
-          </motion.div>
+          <div className="hero-scene">
+            <div className="scene-label"><span>FROM SEQUENCE TO STRUCTURE</span><span>01 — 03</span></div>
+            <HeroVisual pdbId="1EMA" handNote="Explore. Understand. Design something new." statCard={{ title: 'Example structure information', rows: [{ label: 'Structure', value: '1EMA · Chain A' }, { label: 'Source', value: 'RCSB PDB' }, { label: 'View', value: 'Interactive 3D' }] }} />
+            <div className="scene-note"><span className="note-line" /> Real molecular structure. Yours to explore.</div>
+          </div>
         </div>
+        <div className="site-container"><div className="platform-strip">
+          <span className="platform-strip-label">YOUR RESEARCH,<br /><strong>CONNECTED.</strong></span>
+          <div><ScienceIcon kind="design" size={21} /><span>Generative protein design</span></div>
+          <div><ScienceIcon kind="screening" size={21} /><span>Informed candidate selection</span></div>
+          <div><ScienceIcon kind="dynamics" size={21} /><span>Molecular-level insight</span></div>
+        </div></div>
       </section>
 
-      <BenefitStrip items={[
-        { icon: Rocket, label: 'Generative AI Design' },
-        { icon: Database, label: 'Integrated Analysis Tools' },
-        { icon: Users, label: 'Accessible for Researchers' },
-        { icon: Zap, label: 'Faster Path to Discovery' },
-      ]} />
-
-      {/* ---------------------------------------------------------------- Tools */}
-      <section id="tools" className="relative max-w-7xl mx-auto px-6 pt-24 pb-20">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">Explore Our <span className="text-emerald-600">Tools</span></h2>
-          <p className="text-slate-500 text-[15px]">A complete pipeline to design, evaluate, and analyze proteins — all in one place.</p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {TOOLS.map((t, i) => (
-            <motion.div key={t.title} initial="hidden" whileInView="show" viewport={{ once: true, margin: '-60px' }} variants={fadeUpVariant}
-              transition={{ duration: 0.45, delay: i * 0.08 }}
-              className="rounded-2xl border border-slate-200 bg-white overflow-hidden hover:shadow-lg hover:-translate-y-0.5 transition-all">
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className={`flex h-11 w-11 items-center justify-center rounded-xl ${t.tint}`}>
-                    <t.icon size={20} strokeWidth={1.75} />
-                  </span>
-                  <span className={`text-[10px] font-bold tracking-wide px-2 py-1 rounded-full ${t.tagTint}`}>{t.tag}</span>
-                </div>
-                <h3 className="font-bold text-lg mb-2">{t.title}</h3>
-                <p className="text-[13px] text-slate-500 leading-relaxed mb-4 min-h-[3.5rem]">{t.desc}</p>
-              </div>
-              <div className={`mx-6 rounded-xl ${t.tint} h-32 flex items-center justify-center mb-5`}>
-                <t.icon size={44} strokeWidth={1} className="opacity-40" />
-              </div>
-              <div className="px-6 pb-6">
-                <ul className="space-y-1.5 mb-5">
-                  {t.bullets.map((b) => (
-                    <li key={b} className="flex items-center gap-2 text-[12.5px] text-slate-600 font-medium">
-                      <span className="h-1 w-1 rounded-full bg-slate-400 shrink-0" /> {b}
-                    </li>
-                  ))}
-                </ul>
-                <Link to={t.to} className={`inline-flex items-center justify-center gap-1.5 w-full rounded-lg px-4 py-2.5 text-[13px] font-bold text-white transition-colors ${t.buttonClass}`}>
-                  Get Started <ArrowRight size={14} strokeWidth={2.5} />
-                </Link>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      <section id="tools" className="site-container tools-section">
+        <div className="section-heading"><div><p className="eyebrow">ONE PLATFORM. MORE POSSIBILITIES.</p><h2>A thoughtful toolkit.<br /><span>For your next discovery.</span></h2></div><p>Move from an initial idea to a deeper understanding, with the right tools at every step.</p></div>
+        <div className="pipeline-grid">{TOOLS.map(tool => <article key={tool.kind} className={`pipeline-card pipeline-${tool.kind}`}>
+          <div className="pipeline-card-top"><span className="science-tile"><ScienceIcon kind={tool.kind} size={25} /></span><span className="pipeline-eyebrow">{tool.eyebrow}</span><span className="stage-number">0{TOOLS.indexOf(tool) + 1}</span></div>
+          <PipelineArt kind={tool.kind} />
+          <div className="pipeline-card-copy"><h3>{tool.title}</h3><p>{tool.description}</p><ul>{tool.features.map(feature => <li key={feature}><Check size={14} />{feature}</li>)}</ul><span className="tool-availability"><i />{tool.status}</span><Link to={tool.to}>{tool.action}<ArrowUpRight size={18} /></Link></div>
+        </article>)}</div>
       </section>
 
-      {/* ---------------------------------------------------------------- Why */}
-      <section className="relative max-w-7xl mx-auto px-6 py-20">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">Why Choose <span className="text-emerald-600">BioGen AI</span>?</h2>
-          <p className="text-slate-500 text-[15px]">Designed for researchers. Built to remove barriers. Focused on real impact.</p>
-        </motion.div>
-        <IconGrid columns={5} items={[
-          { icon: Clock, title: 'Save Time', desc: 'Go from idea to candidate in hours, not weeks.' },
-          { icon: Coins, title: 'Cost-Effective', desc: 'Access powerful tools without expensive hardware or software.' },
-          { icon: Cloud, title: 'No GPU Limitation', desc: 'Run complex computations on our cloud infrastructure — no local GPU needed.' },
-          { icon: LayoutGrid, title: 'All-in-One Platform', desc: 'Design, screen, and simulate in a single, easy-to-use platform.' },
-          { icon: Trophy, title: 'Accelerate Research', desc: 'Focus on science, not infrastructure. Turn ideas into real-world solutions.' },
-        ]} />
-      </section>
+      <section className="research-section"><div className="site-container research-layout">
+        <div className="research-intro"><p className="eyebrow">LESS FRICTION. MORE SCIENCE.</p><h2>Stay curious.<br />We’ll handle<br /> <span>the complexity.</span></h2><p>A considered workspace that keeps your research moving, from the first parameter to the final structure.</p><Link to="/about" className="text-link">Meet BioGen AI <ArrowUpRight size={17} /></Link></div>
+        <div className="research-features">{[
+          { icon: Cloud, title: 'Your browser is your lab', desc: 'Run RFdiffusion on cloud GPUs. Get started without managing local compute.' },
+          { icon: SlidersHorizontal, title: 'Control where it matters', desc: 'Choose your design strategy and fine-tune parameters for your research question.' },
+          { icon: Cube, title: 'See the whole structure', desc: 'Inspect your results in an interactive 3D viewer, right beside your design workflow.' },
+          { icon: Export, title: 'Take your work further', desc: 'Download generated structures and continue exploring with your preferred research tools.' },
+        ].map(item => <div className="research-feature" key={item.title}><IconTile icon={item.icon} /><h3>{item.title}</h3><p>{item.desc}</p></div>)}</div>
+      </div></section>
 
-      {/* ---------------------------------------------------------------- How */}
-      <section className="relative max-w-6xl mx-auto px-6 py-20">
-        <motion.div initial="hidden" whileInView="show" viewport={{ once: true, margin: '-80px' }} variants={fadeUpVariant} transition={{ duration: 0.5 }}
-          className="text-center max-w-2xl mx-auto mb-14">
-          <h2 className="text-3xl sm:text-4xl font-black tracking-tight mb-3">How It Works</h2>
-          <p className="text-slate-500 text-[15px]">A simple workflow from design to discovery.</p>
-        </motion.div>
+      <section id="workflow" className="site-container workflow-section"><div className="section-heading"><div><p className="eyebrow">A CLEAR PATH FORWARD</p><h2>From a question<br /><span>to what comes next.</span></h2></div><p>Start with a target. Explore the structure. Let each result guide your next experiment.</p></div>
         <HowItWorks steps={[
-          { icon: Upload, title: 'Input', desc: 'Provide your sequence, structure, or design goal.' },
-          { icon: Settings, title: 'Run Tool', desc: 'Design, screen, or simulate using our integrated tools.' },
-          { icon: BarChart3, title: 'Analyze', desc: 'Visualize and interpret results.' },
-          { icon: Cpu, title: 'Discover', desc: 'Identify promising candidates for further validation.' },
+          { icon: UploadSimple, title: 'Define your idea', desc: 'Bring a target structure or choose a design goal.' },
+          { icon: CursorClick, title: 'Make it your own', desc: 'Select a strategy and configure your design.' },
+          { icon: ChartLine, title: 'Explore the results', desc: 'Inspect structures and compare candidates.' },
+          { icon: Flask, title: 'Take the next step', desc: 'Export your designs for further evaluation.' },
         ]} />
       </section>
-
-      {/* ---------------------------------------------------------------- CTA */}
-      <section className="relative max-w-6xl mx-auto px-6 pb-24">
-        <CTABanner
-          tone="light"
-          eyebrow="Ready to start?"
-          title="Turn Your Ideas Into Real Proteins"
-          description="Join BioGen AI and be part of a growing community advancing computational biology for a healthier tomorrow."
-          buttonLabel="Get Started Now"
-          buttonTo="/rfdiffusion"
-        />
-      </section>
-
-      <SiteFooter />
-    </div>
-  );
+      <section className="site-container home-cta-wrap"><div className="home-cta"><div className="cta-orbits" aria-hidden="true"><i /><i /><i /></div><div><p className="eyebrow">YOUR NEXT IDEA STARTS HERE</p><h2>What will you<br /><span>discover next?</span></h2><p>A new protein. A better question. A possibility worth exploring.</p></div><Link to="/rfdiffusion/studio" className="button-primary">Open design workspace <ArrowRight size={18} /></Link></div></section>
+    </main>
+    <SiteFooter />
+  </div>;
 }

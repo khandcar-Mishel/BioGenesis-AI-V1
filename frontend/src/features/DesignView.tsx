@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Zap, HelpCircle, ChevronDown, MoreVertical, X, Loader2, Check, AlertTriangle } from 'lucide-react';
+import { Lightning, Question, CaretDown, DotsThreeVertical, X, CircleNotch, Check, Warning } from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { MolecularViewer } from './MolecularViewer';
 import { submitJob, getJobStatus } from '../services/api';
@@ -182,7 +182,7 @@ export function DesignView() {
           <div className="flex items-center gap-1.5 mb-3">
             <h2 className="text-[14px] font-bold text-slate-800">Target structure</h2>
             <div className="relative group flex items-center">
-              <HelpCircle size={14} className="text-slate-400 cursor-pointer hover:text-slate-600 transition" />
+              <Question size={14} weight="regular" className="text-slate-400 cursor-pointer hover:text-slate-600 transition" />
               <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 bg-slate-800 text-white text-[11px] font-medium p-2.5 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 pointer-events-none">
                 <span className="font-bold text-[12px] block mb-1">Target structure</span>
                 Enter a PDB ID or UniProt ID to retrieve a protein structure from RCSB PDB, or upload a local PDB file. The loaded structure will be used as the target for protein design.
@@ -211,28 +211,28 @@ export function DesignView() {
           
           {structureStatus === 'empty' && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] shrink-0"><X size={10} strokeWidth={3} /></div>
+              <div className="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] shrink-0"><X size={10} weight="bold" /></div>
               Structure not loaded: Null
             </div>
           )}
           
           {structureStatus === 'loading' && (
             <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <Loader2 size={16} className="animate-spin text-emerald-500 shrink-0" />
+              <CircleNotch size={16} weight="regular" className="animate-spin text-emerald-500 shrink-0" />
               Loading structure...
             </div>
           )}
           
           {structureStatus === 'success' && (
             <div className="bg-emerald-50 border border-emerald-200 text-emerald-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0"><Check size={10} strokeWidth={3} /></div>
+              <div className="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0"><Check size={10} weight="bold" /></div>
               Structure loaded: {activePdb} <span className="font-medium text-emerald-600">{structureDetails}</span>
             </div>
           )}
           
           {structureStatus === 'error' && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <div className="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] shrink-0"><X size={10} strokeWidth={3} /></div>
+              <div className="w-4 h-4 rounded-full bg-red-500 text-white flex items-center justify-center text-[10px] shrink-0"><X size={10} weight="bold" /></div>
               Failed to load structure: {structureError}
             </div>
           )}
@@ -261,7 +261,7 @@ export function DesignView() {
                   <option>Unconditional</option>
                   <option>Motif Scaffolding</option>
                 </select>
-                <ChevronDown size={14} className="absolute right-2 top-2 text-slate-500 pointer-events-none" />
+                <CaretDown size={14} weight="regular" className="absolute right-2 top-2 text-slate-500 pointer-events-none" />
               </div>
             </div>
           </div>
@@ -277,7 +277,7 @@ export function DesignView() {
                   <option value="pdl1_binder">pdl1_binder</option>
                   <option value="custom">custom</option>
                 </select>
-                <ChevronDown size={14} className="absolute right-2 top-2 text-slate-500 pointer-events-none" />
+                <CaretDown size={14} weight="regular" className="absolute right-2 top-2 text-slate-500 pointer-events-none" />
               </div>
               <button className="text-emerald-600 font-semibold hover:underline">View preset details</button>
             </div>
@@ -305,7 +305,7 @@ export function DesignView() {
           <div className="border-t border-slate-100 pt-2">
             <button className="flex items-center justify-between w-full text-[12px] font-semibold text-slate-700">
               Advanced parameters
-              <ChevronDown size={14} className="text-slate-400" />
+              <CaretDown size={14} weight="regular" className="text-slate-400" />
             </button>
           </div>
         </div>
@@ -317,7 +317,7 @@ export function DesignView() {
           <div className="flex items-end gap-3 mb-4">
             <div className="flex-1">
               <label className="flex items-center gap-1 font-semibold text-slate-700 mb-1 text-[11px]">
-                Diffusion steps <HelpCircle size={10} className="text-slate-400" />
+                Diffusion steps <Question size={10} weight="regular" className="text-slate-400" />
               </label>
               <div className="relative">
                 <select value={iterations} onChange={e => setIterations(e.target.value)} className="w-full border border-slate-300 rounded-lg px-2 py-1 bg-white shadow-sm appearance-none">
@@ -325,7 +325,7 @@ export function DesignView() {
                   <option value="50">50</option>
                   <option value="100">100</option>
                 </select>
-                <ChevronDown size={14} className="absolute right-2 top-1.5 text-slate-500 pointer-events-none" />
+                <CaretDown size={14} weight="regular" className="absolute right-2 top-1.5 text-slate-500 pointer-events-none" />
               </div>
             </div>
             <div className="flex-1">
@@ -339,7 +339,7 @@ export function DesignView() {
                   <option value="8">8</option>
                   <option value="16">16</option>
                 </select>
-                <ChevronDown size={14} className="absolute right-2 top-1.5 text-slate-500 pointer-events-none" />
+                <CaretDown size={14} weight="regular" className="absolute right-2 top-1.5 text-slate-500 pointer-events-none" />
               </div>
             </div>
             <div className="flex items-center gap-1.5 mb-1 cursor-pointer ml-1" onClick={() => setSymmetry(!symmetry)}>
@@ -350,7 +350,7 @@ export function DesignView() {
 
           {!isGenerating ? (
             <button onClick={handleGenerate} className="w-full bg-[#059669] hover:bg-[#047857] text-white font-bold py-2.5 rounded-lg flex items-center justify-center gap-1.5 transition shadow-sm text-[13px]">
-              <Zap size={14} fill="white" />
+              <Lightning size={14} weight="fill" />
               Generate designs
             </button>
           ) : (
@@ -370,14 +370,14 @@ export function DesignView() {
           
           {!isGenerating && jobFailed && (
             <div className="mt-3 bg-red-50 border border-red-200 text-red-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <AlertTriangle size={14} className="text-red-500 shrink-0" />
+              <Warning size={14} weight="regular" className="text-red-500 shrink-0" />
               Generation failed. Please try again.
             </div>
           )}
 
           {!isGenerating && submitError && !jobFailed && (
             <div className="mt-3 bg-red-50 border border-red-200 text-red-700 px-2 py-2 rounded-lg text-[11px] font-semibold flex items-center gap-2">
-              <AlertTriangle size={14} className="text-red-500 shrink-0" />
+              <Warning size={14} weight="regular" className="text-red-500 shrink-0" />
               {submitError}
             </div>
           )}
@@ -420,7 +420,7 @@ export function DesignView() {
                 <select className="border border-slate-300 rounded-md px-2 py-1 bg-white appearance-none pr-7">
                   <option>Cartoon</option>
                 </select>
-                <ChevronDown size={12} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
+                <CaretDown size={12} weight="regular" className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
               </div>
             </div>
             <div className="flex items-center gap-1.5 text-slate-600">
@@ -429,11 +429,11 @@ export function DesignView() {
                 <select className="border border-slate-300 rounded-md px-2 py-1 bg-white appearance-none pr-7">
                   <option>By Chain</option>
                 </select>
-                <ChevronDown size={12} className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
+                <CaretDown size={12} weight="regular" className="absolute right-2 top-1.5 text-slate-400 pointer-events-none" />
               </div>
             </div>
             <button className="text-slate-400 hover:text-slate-600 ml-1">
-              <MoreVertical size={16} />
+              <DotsThreeVertical size={16} weight="regular" />
             </button>
           </div>
         </div>

@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   ArrowRight, Lightbulb, Target, SlidersHorizontal, Rocket, Cpu, ShieldCheck,
-  Dna, Puzzle, Waves as WavesIcon, Shapes, ExternalLink, Quote,
-} from 'lucide-react';
+  Dna, PuzzlePiece, Waves as WavesIcon, Shapes, ArrowSquareOut, Quotes,
+} from '@phosphor-icons/react';
 import { Navbar } from '../components/Navbar';
 import { SiteFooter } from '../components/SiteFooter';
 import { HeroVisual } from '../components/HeroVisual';
@@ -12,22 +12,22 @@ import { BenefitStrip, IconGrid, CTABanner, fadeUpVariant } from '../components/
 const DESIGN_TYPES = [
   { icon: Target, title: 'Binder Design', desc: 'Design binding partners against a target structure.' },
   { icon: Dna, title: 'De Novo Design', desc: 'Generate novel protein backbones from scratch.' },
-  { icon: Puzzle, title: 'Motif Scaffolding', desc: 'Build around a functional structural motif.' },
+  { icon: PuzzlePiece, title: 'Motif Scaffolding', desc: 'Build around a functional structural motif.' },
   { icon: WavesIcon, title: 'Partial Diffusion', desc: 'Redesign selected regions of an input structure.' },
   { icon: Shapes, title: 'Symmetric Design', desc: 'Generate symmetric oligomers and complexes.' },
 ];
 
 export function RFdiffusionLanding() {
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="marketing-page min-h-screen text-slate-900">
       <Navbar />
 
-      <section className="relative hero-wash pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+      <section id="main-content" className="relative hero-wash pt-16 pb-24">
+        <div className="site-container grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full bg-emerald-50 border border-emerald-100 px-3.5 py-1.5 mb-6">
-              <Dna size={12} className="text-emerald-600" />
+              <Dna size={12} weight="duotone" className="text-emerald-600" />
               <span className="text-[11px] font-bold text-emerald-700 tracking-wide uppercase">RFdiffusion Studio</span>
             </motion.div>
 
@@ -45,7 +45,7 @@ export function RFdiffusionLanding() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
               className="flex flex-wrap items-center gap-3">
               <Link to="/rfdiffusion/studio" className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
-                Open RFdiffusion Workspace <ArrowRight size={15} strokeWidth={2.5} />
+                Open RFdiffusion Workspace <ArrowRight size={15} weight="bold" />
               </Link>
               <a href="#designs" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
                 View Examples
@@ -60,7 +60,7 @@ export function RFdiffusionLanding() {
               handNote={'New\nStructures\nNew Possibilities'}
               statCard={{ title: 'From target to backbone', rows: [
                 { label: 'Model', value: 'RFdiffusion' },
-                { label: 'Params', value: 'v1.1.1' },
+                { label: 'Stage', value: 'Backbone design' },
                 { label: 'Compute', value: 'Modal GPU' },
               ]}}
             />
@@ -104,7 +104,7 @@ export function RFdiffusionLanding() {
             structure, motif, or other constraints.
           </p>
           <a href="/rfdiffusion/studio" className="inline-flex items-center gap-1 text-[13px] font-bold text-emerald-700 hover:text-emerald-800">
-            Learn more <ArrowRight size={13} />
+            Learn more <ArrowRight size={13} weight="regular" />
           </a>
         </motion.div>
 
@@ -147,11 +147,11 @@ export function RFdiffusionLanding() {
             <p className="text-[13px] text-slate-500 mb-3">University of Washington · Institute for Protein Design</p>
             <a href="https://www.biorxiv.org/content/10.1101/2022.12.09.519842v2" target="_blank" rel="noreferrer"
               className="inline-flex items-center gap-1 text-[13px] font-bold text-emerald-700 hover:text-emerald-800">
-              Read the original paper <ExternalLink size={13} />
+              Read the original paper <ArrowSquareOut size={13} weight="regular" />
             </a>
           </div>
           <div className="bg-white rounded-xl border border-slate-100 p-4 max-w-xs">
-            <Quote size={16} className="text-emerald-300 mb-2" />
+            <Quotes size={16} weight="duotone" className="text-emerald-300 mb-2" />
             <p className="text-[12.5px] text-slate-600 italic leading-relaxed">
               &ldquo;The goal is not just to predict protein structures, but to create new proteins with desired functions.&rdquo;
             </p>

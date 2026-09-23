@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, type LucideIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, type Icon } from '@phosphor-icons/react';
 import { Navbar } from './Navbar';
 import { SiteFooter } from './SiteFooter';
 
 interface ComingSoonProps {
-  icon: LucideIcon;
+  icon: Icon;
   eyebrow: string;
   title: string;
   description: string;
@@ -16,11 +16,11 @@ export function ComingSoon({ icon: Icon, eyebrow, title, description, bullets }:
   return (
     <div className="min-h-screen bg-white text-slate-900 flex flex-col">
       <Navbar />
-      <main className="relative hero-wash flex-1">
+      <main id="main-content" className="relative hero-wash flex-1">
         <div className="max-w-2xl mx-auto px-6 pt-24 pb-24 text-center">
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.5 }}
             className="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-emerald-50 border border-emerald-100 mb-6">
-            <Icon size={28} className="text-emerald-600" strokeWidth={1.5} />
+            <Icon size={28} weight="duotone" className="text-emerald-600" />
           </motion.div>
 
           <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.05 }}
@@ -56,10 +56,10 @@ export function ComingSoon({ icon: Icon, eyebrow, title, description, bullets }:
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55, delay: 0.25 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link to="/rfdiffusion/studio" className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700">
-              Try RFdiffusion instead <ArrowRight size={14} />
+              Try RFdiffusion instead <ArrowRight size={14} weight="regular" />
             </Link>
             <Link to="/" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-600 transition-colors hover:border-slate-400 hover:text-slate-900">
-              <ArrowLeft size={14} /> Back to Home
+              <ArrowLeft size={14} weight="regular" /> Back to Home
             </Link>
           </motion.div>
         </div>

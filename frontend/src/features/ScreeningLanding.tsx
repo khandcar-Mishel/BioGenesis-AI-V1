@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  ArrowRight, ShieldCheck, BarChart3, Target, Filter, Search, ExternalLink,
-  FileText, Settings, Eye, GitCompare, CheckSquare, Microscope,
-} from 'lucide-react';
+  ArrowRight, ShieldCheck, ChartBar, Target, Funnel, MagnifyingGlass, ArrowSquareOut,
+  FileText, Gear, Eye, GitDiff, CheckSquare, Microscope,
+} from '@phosphor-icons/react';
 import { Navbar } from '../components/Navbar';
 import { SiteFooter } from '../components/SiteFooter';
 import { HeroVisual } from '../components/HeroVisual';
@@ -32,15 +32,15 @@ export function ScreeningLanding() {
   }, [query]);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
+    <div className="marketing-page min-h-screen text-slate-900">
       <Navbar />
 
-      <section className="relative hero-wash pt-16 pb-24">
-        <div className="max-w-7xl mx-auto px-6 pt-14 grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
+      <section id="main-content" className="relative hero-wash pt-16 pb-24">
+        <div className="site-container grid lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
           <div>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 rounded-full bg-violet-50 border border-violet-100 px-3.5 py-1.5 mb-6">
-              <Microscope size={12} className="text-violet-600" />
+              <Microscope size={12} weight="duotone" className="text-violet-600" />
               <span className="text-[11px] font-bold text-violet-700 tracking-wide uppercase">Peptide Screening Studio</span>
             </motion.div>
 
@@ -59,7 +59,7 @@ export function ScreeningLanding() {
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }}
               className="flex flex-wrap items-center gap-3">
               <Link to="/screening/workspace" className="inline-flex items-center gap-2 rounded-lg bg-violet-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-violet-700">
-                Open Screening Workspace <ArrowRight size={15} strokeWidth={2.5} />
+                Open Screening Workspace <ArrowRight size={15} weight="bold" />
               </Link>
               <a href="#tools" className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 transition-colors hover:border-slate-400 hover:bg-slate-50">
                 Learn More
@@ -74,7 +74,7 @@ export function ScreeningLanding() {
       </section>
 
       <BenefitStrip items={[
-        { icon: Settings, label: 'Multi-parameter evaluation' },
+        { icon: Gear, label: 'Multi-parameter evaluation' },
         { icon: ShieldCheck, label: 'Trusted bioinformatics tools' },
         { icon: Target, label: 'Prioritize the best candidates' },
       ]} />
@@ -91,9 +91,9 @@ export function ScreeningLanding() {
         </motion.div>
         <IconGrid columns={4} items={[
           { icon: ShieldCheck, title: 'Ensure Safety', desc: 'Predict potential toxicity, allergenicity and off-target risks.' },
-          { icon: BarChart3, title: 'Assess Developability', desc: 'Evaluate stability, solubility and aggregation propensity.' },
+          { icon: ChartBar, title: 'Assess Developability', desc: 'Evaluate stability, solubility and aggregation propensity.' },
           { icon: Target, title: 'Predict Bioactivity', desc: 'Identify functional properties such as cell-penetration or antioxidant activity.' },
-          { icon: Filter, title: 'Prioritize Candidates', desc: 'Select the most promising peptides for further validation and experimental testing.' },
+          { icon: Funnel, title: 'Prioritize Candidates', desc: 'Select the most promising peptides for further validation and experimental testing.' },
         ]} />
       </section>
 
@@ -105,7 +105,7 @@ export function ScreeningLanding() {
             <p className="text-slate-500 text-[15px]">A collection of trusted, widely-used bioinformatics tools to evaluate multiple properties of your designed peptides.</p>
           </div>
           <div className="relative w-full sm:w-72 shrink-0">
-            <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+            <MagnifyingGlass size={15} weight="regular" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -133,7 +133,7 @@ export function ScreeningLanding() {
                   <td className="px-4 py-3 hidden md:table-cell">
                     <a href={t.url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-slate-500 hover:text-violet-600 truncate max-w-[16rem]">
                       <span className="truncate">{t.url.replace(/^https?:\/\//, '')}</span>
-                      <ExternalLink size={11} className="shrink-0" />
+                      <ArrowSquareOut size={11} weight="regular" className="shrink-0" />
                     </a>
                   </td>
                   <td className="px-4 py-3 hidden lg:table-cell text-slate-500">{t.desc}</td>
@@ -155,9 +155,9 @@ export function ScreeningLanding() {
         </motion.div>
         <HowItWorks steps={[
           { icon: FileText, title: 'Input Sequences', desc: 'Upload or paste peptide sequences from RFdiffusion.' },
-          { icon: Settings, title: 'Run Screening Tools', desc: 'Automatically analyze multiple properties.' },
+          { icon: Gear, title: 'Run Screening Tools', desc: 'Automatically analyze multiple properties.' },
           { icon: Eye, title: 'View Results', desc: 'See property predictions and detailed reports.' },
-          { icon: GitCompare, title: 'Compare Candidates', desc: 'Rank and compare peptides based on key metrics.' },
+          { icon: GitDiff, title: 'Compare Candidates', desc: 'Rank and compare peptides based on key metrics.' },
           { icon: CheckSquare, title: 'Select for Validation', desc: 'Choose the most promising candidates for further studies.' },
         ]} />
       </section>
