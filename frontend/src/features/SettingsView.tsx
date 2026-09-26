@@ -112,7 +112,7 @@ export function SettingsView() {
   };
 
   return (
-    <div className="w-full h-full bg-white flex flex-col overflow-hidden">
+    <div className="w-full min-h-[550px] h-full bg-white border border-ws-border rounded-[14px] flex flex-col overflow-hidden">
       {/* GPU STATUS BAR - ALWAYS VISIBLE AT TOP */}
       <div className={`flex items-center justify-between px-4 py-2 border-b shrink-0 ${
         gpuStatus === 'connected' ? 'bg-emerald-50 border-emerald-100' :

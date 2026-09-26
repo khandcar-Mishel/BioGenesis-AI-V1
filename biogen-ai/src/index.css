@@ -1,0 +1,162 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@600&display=swap');
+
+@theme {
+  --color-primary: #0FA77F;
+  --color-primary-dark: #078866;
+  --color-primary-light: #4DD0B0;
+  
+  --color-navy: #071A33;
+  --color-hero-dark: #021525;
+  --color-hero-blue: #07293E;
+  
+  --color-blue: #0F7CDF;
+  --color-cyan: #4DD0D1;
+  --color-purple: #684CDF;
+  
+  --color-bg-main: #FFFFFF;
+  --color-bg-soft: #F7FAFB;
+  --color-bg-mint: #ECF8F6;
+  
+  --color-text-primary: #071A33;
+  --color-text-secondary: #60708A;
+  --color-text-muted: #8492A6;
+  
+  --color-border-main: #DDE8EA;
+  --color-border-light: #E8F0F1;
+
+  /* BioGen Screening Specific Design System */
+  --color-screen-navy: #10233F;
+  --color-screen-navy-dark: #0B1C32;
+  --color-screen-green: #079B78;
+  --color-screen-green-dark: #087F67;
+  --color-screen-green-light: #DDF5EE;
+  --color-screen-teal: #10AFC0;
+  --color-screen-cyan-light: #E8FAF8;
+  --color-screen-bg: #FDFEFE;
+  --color-screen-surface: #FFFFFF;
+  --color-screen-surface-soft: #F5FAFA;
+  --color-screen-border: #DDE8E7;
+  --color-screen-border-light: #EAF1F1;
+  --color-screen-text-primary: #10233F;
+  --color-screen-text-secondary: #58708A;
+  --color-screen-text-muted: #71869A;
+  --color-screen-cta: #063F42;
+  --color-bio-green: #0B8F70;
+  --color-bio-green-dark: #006B58;
+  --color-bio-green-light: #EAF8F4;
+  
+  --color-protein-blue: #2F80ED;
+  --color-protein-blue-light: #EAF3FF;
+  
+  --color-bio-deep: #003D38;
+  
+  --color-text-main: #101828;
+  --color-text-soft: #667085;
+  --color-text-muted-light: #98A2B3;
+  
+  --color-bg-base: #FFFFFF;
+  --color-bg-alt: #F8FAFC;
+  --color-bg-pale-mint: #F1FAF8;
+  
+  --color-border-subtle: #E4E7EC;
+
+  /* BioGen MD Simulation Specific Design System */
+  --color-md-bg: #FDFDFD;
+  --color-md-navy: #022C2E;
+  --color-md-teal: #104F50;
+  --color-md-green: #11A277;
+  --color-md-green-sec: #18B889;
+  --color-md-mint-light: #EDF8F9;
+  --color-md-mint: #D0EAEA;
+  --color-md-blue: #296FC7;
+  --color-md-text: #526779;
+  --color-md-muted: #788A92;
+  --color-md-border: #DDE7E8;
+  --color-md-white: #FFFFFF;
+
+  /* BioGen About Specific Design System */
+  --color-about-green: #00A878;
+  --color-about-green-sec: #12B886;
+  --color-about-navy: #071A3D;
+  --color-about-navy-head: #0A1B3D;
+  --color-about-text: #526B8A;
+  --color-about-muted: #7186A3;
+  --color-about-bg: #F7FBFC;
+  --color-about-cyan: #EAF8F7;
+  --color-about-border: #DDE8EC;
+  --color-about-white: #FFFFFF;
+  --color-about-hero-cyan: #E8F7FA;
+
+  /* BioGen Workspace Specific Design System */
+  --color-ws-primary: #10A875;
+  --color-ws-dark: #087A59;
+  --color-ws-deep: #066B4D;
+  --color-ws-pale: #ECFDF5;
+  --color-ws-pale-subtle: #F2FBF7;
+  --color-ws-page: #F8FAFC;
+  --color-ws-card: #FFFFFF;
+  --color-ws-text: #172033;
+  --color-ws-text-sec: #667085;
+  --color-ws-muted: #98A2B3;
+  --color-ws-border: #E5E7EB;
+  --color-ws-border-light: #EEF1F4;
+  --color-ws-success: #12B76A;
+  --color-ws-warning: #F59E0B;
+  --color-ws-error: #EF4444;
+  --color-ws-chain-blue: #2F80ED;
+  --color-ws-chain-green: #20B15A;
+  --color-ws-chain-yellow: #EAB308;
+  --color-ws-chain-purple: #8B3FD9;
+  --color-ws-progress: #E9EEF3;
+  --color-ws-disabled: #D0D5DD;
+}
+
+@layer base {
+  :root {
+    --primary: #0FA77F;
+    --primary-dark: #078866;
+    --primary-light: #4DD0B0;
+    
+    --navy: #071A33;
+    --hero-dark: #021525;
+    --hero-blue: #07293E;
+    
+    --blue: #0F7CDF;
+    --cyan: #4DD0D1;
+    --purple: #684CDF;
+    
+    --background: #FFFFFF;
+    --background-soft: #F7FAFB;
+    --mint-background: #ECF8F6;
+    
+    --text-primary: #071A33;
+    --text-secondary: #60708A;
+    --text-muted: #8492A6;
+    
+    --border: #DDE8EA;
+    --border-light: #E8F0F1;
+  }
+
+  body {
+    @apply bg-bg-main text-text-primary font-sans antialiased selection:bg-primary-light/30;
+  }
+}
+
+@layer utilities {
+  .text-gradient-primary {
+    @apply bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent;
+  }
+  
+  .glass-panel {
+    @apply bg-white/95 backdrop-blur-md border-b border-border-light;
+  }
+
+  .card-shadow {
+    box-shadow: 0 4px 20px rgba(7, 26, 51, 0.05);
+  }
+  
+  .card-shadow-hover {
+    box-shadow: 0 10px 30px rgba(7, 26, 51, 0.1);
+  }
+}

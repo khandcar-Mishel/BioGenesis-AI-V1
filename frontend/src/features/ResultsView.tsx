@@ -57,8 +57,8 @@ export function ResultsView() {
   }, [hasResults, jobStatus?.job_id, selectedIdx]);
 
   return (
-    <div className="h-full flex gap-4">
-      <div className="w-[400px] bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col">
+    <div className="min-h-[600px] h-full flex flex-col lg:flex-row gap-3.5">
+      <div className="w-full lg:w-[340px] shrink-0 bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col">
         {downloadError && (
           <div className="mb-2 text-[11px] font-bold px-3 py-1.5 rounded-md bg-red-50 text-red-600 border border-red-100">
             {downloadError}
@@ -119,7 +119,7 @@ export function ResultsView() {
         )}
       </div>
 
-      <div className="flex-1 bg-white border border-slate-200 rounded-xl shadow-sm flex flex-col overflow-hidden">
+      <div className="flex-1 min-h-[460px] bg-white border border-ws-border rounded-[14px] shadow-sm flex flex-col overflow-hidden">
         <div className="px-4 py-2 border-b border-slate-100 flex items-center justify-between shrink-0">
           <h3 className="font-bold text-slate-800 text-[13px]">
             {hasResults ? jobStatus.output_files[selectedIdx] : 'No result selected'}

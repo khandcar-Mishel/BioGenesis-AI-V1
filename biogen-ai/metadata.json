@@ -1,0 +1,6 @@
+{
+  "name": "BioGen AI",
+  "description": "Premium computational biology platform combining AI protein design, screening, and molecular dynamics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

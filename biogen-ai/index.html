@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BioGen AI</title>
+    <meta name="description" content="Premium computational biology platform combining AI protein design, screening, and molecular dynamics." />
+    <meta property="og:title" content="BioGen AI" />
+    <meta property="og:description" content="Premium computational biology platform combining AI protein design, screening, and molecular dynamics." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // Polyfill & safeguard against WebKit/Safari "null is not an object (evaluating 'e.close')" in 3Dmol / WebGL
+      (function() {
+        if (typeof OffscreenCanvas !== 'undefined' && OffscreenCanvas.prototype.transferToImageBitmap) {
+          var origTransfer = OffscreenCanvas.prototype.transferToImageBitmap;
+          OffscreenCanvas.prototype.transferToImageBitmap = function() {
+            try {
+              var bmp = origTransfer.call(this);
+              if (bmp) return bmp;
+            } catch (err) {}
+            return {
+              width: this.width || 1,
+              height: this.height || 1,
+              close: function() {}
+            };
+          };
+        }
+        if (typeof ImageBitmapRenderingContext !== 'undefined' && ImageBitmapRenderingContext.prototype.transferFromImageBitmap) {
+          var origFrom = ImageBitmapRenderingContext.prototype.transferFromImageBitmap;
+          ImageBitmapRenderingContext.prototype.transferFromImageBitmap = function(bitmap) {
+            if (!bitmap) return;
+            try {
+              origFrom.call(this, bitmap);
+            } catch (err) {}
+          };
+        }
+        window.addEventListener('error', function(event) {
+          if (event && event.message && event.message.indexOf("e.close") !== -1) {
+            event.preventDefault();
+            event.stopPropagation();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
